@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIOA V1 - Temperatura</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#dfe9ec;font-family:Arial,sans-serif;color:#173843}
+.phone{width:390px;min-height:820px;margin:18px auto;background:#f5fafb;border-radius:30px;overflow:hidden;box-shadow:0 14px 40px #0003;position:relative}
+.hero{height:190px;padding:20px;color:white;background:linear-gradient(#173f58aa,#0d526e99),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80') center/cover}
+.logo{font-weight:900;font-size:21px}.shell{font-size:30px;vertical-align:middle}.sub{font-size:10px;letter-spacing:.4px;margin-left:39px}
+.greet{margin-top:55px;font-size:20px;font-weight:800}.date{font-size:11px;margin-top:6px}
+.content{padding:16px 18px 88px}.back{border:0;background:none;color:#286579;font-weight:800;padding:0 0 12px;cursor:pointer}
+h2{margin:0 0 12px;font-size:22px}.main{background:white;border-radius:20px;padding:20px;text-align:center;box-shadow:0 3px 12px #0001}
+.big{font-size:48px;font-weight:900;margin:7px 0}.muted{font-size:11px;color:#6b7d84}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.metric{background:white;border-radius:16px;padding:14px;text-align:center;box-shadow:0 2px 9px #0001}.metric strong{display:block;font-size:21px;margin-top:6px}
+.btn{display:block;width:100%;padding:15px;border:0;border-radius:15px;margin-top:11px;font-weight:800;font-size:14px;text-decoration:none;text-align:center}
+.primary{background:#167f9b;color:white}.secondary{background:#275b6d;color:white}.light{background:#e6f1f4;color:#245769}
+.note{font-size:11px;line-height:1.45;color:#6b7d84;margin-top:14px}.bottom{position:absolute;bottom:0;left:0;right:0;background:white;border-top:1px solid #dce7ea;display:flex;justify-content:space-around;padding:9px}
+.bottom button{border:0;background:none;color:#60747b;font-size:10px;font-weight:700}.bottom b{display:block;font-size:19px}
+</style></head>
+<body><div class="phone">
+<div class="hero"><div class="logo"><span class="shell">🐚</span> SIOA</div>
+<div class="sub">SISTEMA INTEGRAL DE OPERACIONES ACUÍCOLAS</div>
+<div class="greet">Hola Luis Alberto</div>
+<div class="date">📅 Actualizado al 04 agosto 2026, Martes</div></div>
+<main class="content">
+<button class="back" onclick="history.back()">← Volver</button>
+<h2>🌡️ Temperatura</h2>
+<section class="main"><div class="muted">TEMPERATURA MEDIA ACTUAL</div><div class="big">20.1°C</div><div class="muted">Registro diario</div></section>
+<div class="metrics"><div class="metric">☀️ Superficie<strong>20.5°C</strong></div><div class="metric">🌊 Media<strong>20.1°C</strong></div></div>
+<div class="metric" style="margin-top:10px">🌊 Fondo<strong>19.7°C</strong></div>
+<a class="btn primary" href="https://tally.so/r/eqz75k" target="_blank" rel="noopener">📝 Nueva medición</a>
+<a class="btn secondary" href="https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3?ctid=19052b5d-f536-40e1-9e6c-a40e88484c46&pbi_source=linkShare&bookmarkGuid=85db1aa2-e73c-42df-affe-f0145e9cfb77" target="_blank" rel="noopener">📊 Ver Dashboard</a>
+<a class="btn light" href="https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3?ctid=19052b5d-f536-40e1-9e6c-a40e88484c46&pbi_source=linkShare&bookmarkGuid=85db1aa2-e73c-42df-affe-f0145e9cfb77" target="_blank" rel="noopener">📋 Historial / análisis</a>
+<div class="note"><b>Conexión real V1:</b> Nueva medición abre tu Tally actual. Dashboard e historial abren tu informe de Power BI Service. Tus Google Sheets, Make y automatizaciones no se modifican.</div>
+</main>
+<nav class="bottom"><button><b>⌂</b>Inicio</button><button><b>◉</b>Módulos</button><button><b>🌡️</b>Temperatura</button><button><b>🔔</b>Alertas</button></nav>
+</div></body></html>
