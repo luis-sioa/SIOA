@@ -1,37 +1,845 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SIOA V1 - Temperatura</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#083b52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>SIOA | Sistema Integral de Operaciones Acuícolas</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#dfe9ec;font-family:Arial,sans-serif;color:#173843}
-.phone{width:390px;min-height:820px;margin:18px auto;background:#f5fafb;border-radius:30px;overflow:hidden;box-shadow:0 14px 40px #0003;position:relative}
-.hero{height:190px;padding:20px;color:white;background:linear-gradient(#173f58aa,#0d526e99),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80') center/cover}
-.logo{font-weight:900;font-size:21px}.shell{font-size:30px;vertical-align:middle}.sub{font-size:10px;letter-spacing:.4px;margin-left:39px}
-.greet{margin-top:55px;font-size:20px;font-weight:800}.date{font-size:11px;margin-top:6px}
-.content{padding:16px 18px 88px}.back{border:0;background:none;color:#286579;font-weight:800;padding:0 0 12px;cursor:pointer}
-h2{margin:0 0 12px;font-size:22px}.main{background:white;border-radius:20px;padding:20px;text-align:center;box-shadow:0 3px 12px #0001}
-.big{font-size:48px;font-weight:900;margin:7px 0}.muted{font-size:11px;color:#6b7d84}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.metric{background:white;border-radius:16px;padding:14px;text-align:center;box-shadow:0 2px 9px #0001}.metric strong{display:block;font-size:21px;margin-top:6px}
-.btn{display:block;width:100%;padding:15px;border:0;border-radius:15px;margin-top:11px;font-weight:800;font-size:14px;text-decoration:none;text-align:center}
-.primary{background:#167f9b;color:white}.secondary{background:#275b6d;color:white}.light{background:#e6f1f4;color:#245769}
-.note{font-size:11px;line-height:1.45;color:#6b7d84;margin-top:14px}.bottom{position:absolute;bottom:0;left:0;right:0;background:white;border-top:1px solid #dce7ea;display:flex;justify-content:space-around;padding:9px}
-.bottom button{border:0;background:none;color:#60747b;font-size:10px;font-weight:700}.bottom b{display:block;font-size:19px}
-</style></head>
-<body><div class="phone">
-<div class="hero"><div class="logo"><span class="shell">🐚</span> SIOA</div>
-<div class="sub">SISTEMA INTEGRAL DE OPERACIONES ACUÍCOLAS</div>
-<div class="greet">Hola Luis Alberto</div>
-<div class="date">📅 Actualizado al 04 agosto 2026, Martes</div></div>
-<main class="content">
-<button class="back" onclick="history.back()">← Volver</button>
-<h2>🌡️ Temperatura</h2>
-<section class="main"><div class="muted">TEMPERATURA MEDIA ACTUAL</div><div class="big">20.1°C</div><div class="muted">Registro diario</div></section>
-<div class="metrics"><div class="metric">☀️ Superficie<strong>20.5°C</strong></div><div class="metric">🌊 Media<strong>20.1°C</strong></div></div>
-<div class="metric" style="margin-top:10px">🌊 Fondo<strong>19.7°C</strong></div>
-<a class="btn primary" href="https://tally.so/r/eqz75k" target="_blank" rel="noopener">📝 Nueva medición</a>
-<a class="btn secondary" href="https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3?ctid=19052b5d-f536-40e1-9e6c-a40e88484c46&pbi_source=linkShare&bookmarkGuid=85db1aa2-e73c-42df-affe-f0145e9cfb77" target="_blank" rel="noopener">📊 Ver Dashboard</a>
-<a class="btn light" href="https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3?ctid=19052b5d-f536-40e1-9e6c-a40e88484c46&pbi_source=linkShare&bookmarkGuid=85db1aa2-e73c-42df-affe-f0145e9cfb77" target="_blank" rel="noopener">📋 Historial / análisis</a>
-<div class="note"><b>Conexión real V1:</b> Nueva medición abre tu Tally actual. Dashboard e historial abren tu informe de Power BI Service. Tus Google Sheets, Make y automatizaciones no se modifican.</div>
-</main>
-<nav class="bottom"><button><b>⌂</b>Inicio</button><button><b>◉</b>Módulos</button><button><b>🌡️</b>Temperatura</button><button><b>🔔</b>Alertas</button></nav>
-</div></body></html>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#061d29;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* ===== FONDO MARINO ===== */
+
+.app{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(8,48,70,.25),
+            rgba(4,30,43,.78)
+        ),
+        linear-gradient(
+            to bottom,
+            #f19b66 0%,
+            #d66f58 17%,
+            #236078 38%,
+            #0b4057 62%,
+            #061f2d 100%
+        );
+}
+
+.app:before{
+    content:"";
+    position:absolute;
+    left:-10%;
+    right:-10%;
+    bottom:0;
+    height:42%;
+    background:
+        radial-gradient(
+            ellipse at 50% 100%,
+            #082d3c 0%,
+            #061d29 63%,
+            #04151e 100%
+        );
+    clip-path:polygon(
+        0 48%,
+        8% 39%,
+        15% 45%,
+        25% 28%,
+        35% 42%,
+        45% 24%,
+        54% 38%,
+        63% 18%,
+        74% 38%,
+        84% 25%,
+        100% 43%,
+        100% 100%,
+        0 100%
+    );
+    opacity:.95;
+}
+
+.sun{
+    position:absolute;
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    background:rgba(255,218,137,.9);
+    right:16%;
+    top:105px;
+    box-shadow:
+        0 0 35px rgba(255,205,111,.55),
+        0 0 75px rgba(255,166,85,.25);
+}
+
+.wave{
+    position:absolute;
+    left:-5%;
+    width:110%;
+    height:100px;
+    bottom:24%;
+    border-radius:50%;
+    border-top:2px solid rgba(145,211,224,.25);
+    transform:rotate(-2deg);
+}
+
+.wave2{
+    bottom:20%;
+    opacity:.55;
+    transform:rotate(1deg);
+}
+
+/* ===== CONTENEDOR ===== */
+
+.container{
+    position:relative;
+    z-index:2;
+    width:min(100%,520px);
+    margin:auto;
+    padding:18px 15px 35px;
+}
+
+/* ===== CABECERA ===== */
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    flex:0 0 58px;
+    border-radius:18px;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    backdrop-filter:blur(8px);
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+}
+
+.logo svg{
+    width:46px;
+    height:46px;
+}
+
+.title{
+    line-height:1.08;
+}
+
+.title h1{
+    font-size:17px;
+    letter-spacing:.7px;
+    font-weight:800;
+    text-shadow:0 2px 5px rgba(0,0,0,.35);
+}
+
+.title span{
+    display:block;
+    margin-top:4px;
+    font-size:13px;
+    letter-spacing:2px;
+    opacity:.88;
+}
+
+/* ===== SALUDO ===== */
+
+.greeting{
+    margin:10px 2px 12px;
+}
+
+.greeting h2{
+    font-size:22px;
+    font-weight:700;
+}
+
+.date{
+    margin-top:5px;
+    font-size:12px;
+    opacity:.9;
+}
+
+/* ===== PORTADA ===== */
+
+.section-title{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1.8px;
+    margin:16px 2px 9px;
+    opacity:.82;
+}
+
+/* ===== TARJETAS ===== */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.card{
+    min-height:145px;
+    border-radius:19px;
+    padding:14px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);
+    backdrop-filter:blur(12px);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.12);
+    position:relative;
+    overflow:hidden;
+}
+
+.card:after{
+    content:"";
+    position:absolute;
+    width:85px;
+    height:85px;
+    right:-38px;
+    bottom:-42px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+}
+
+.card-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.7px;
+    text-transform:uppercase;
+    opacity:.95;
+}
+
+.icon{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.icon svg{
+    width:20px;
+    height:20px;
+    stroke:white;
+}
+
+.value{
+    margin-top:13px;
+    font-size:27px;
+    line-height:1;
+    font-weight:800;
+}
+
+.unit{
+    margin-top:4px;
+    font-size:10px;
+    opacity:.76;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+}
+
+.secondary{
+    margin-top:13px;
+    padding-top:9px;
+    border-top:1px solid rgba(255,255,255,.18);
+    font-size:11px;
+}
+
+.secondary strong{
+    display:block;
+    font-size:16px;
+    margin-top:2px;
+}
+
+.secondary small{
+    opacity:.7;
+}
+
+/* ===== TARJETA TEMPERATURA ===== */
+
+.temperature{
+    grid-column:span 2;
+    min-height:108px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.temperature .value{
+    font-size:34px;
+}
+
+.temperature .temp-right{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:rgba(255,255,255,.13);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.temperature svg{
+    width:34px;
+    height:34px;
+    stroke:white;
+}
+
+/* ===== MODULOS ===== */
+
+.modules-wrap{
+    margin-top:18px;
+}
+
+.modules{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+}
+
+.module{
+    min-height:91px;
+    border:0;
+    border-radius:17px;
+    color:white;
+    padding:10px 7px;
+    cursor:pointer;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(9px);
+    box-shadow:0 8px 18px rgba(0,0,0,.16);
+    transition:.2s;
+}
+
+.module:active{
+    transform:scale(.96);
+}
+
+.module .micon{
+    width:38px;
+    height:38px;
+    margin:auto;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.module svg{
+    width:23px;
+    height:23px;
+    stroke:white;
+}
+
+.module-name{
+    margin-top:7px;
+    font-size:10px;
+    font-weight:700;
+    line-height:1.1;
+}
+
+.temp-m{background:linear-gradient(135deg,#2486a6,#17617e)}
+.oper-m{background:linear-gradient(135deg,#df8d3e,#b75a2e)}
+.bio-m{background:linear-gradient(135deg,#46a477,#27775b)}
+.stock-m{background:linear-gradient(135deg,#6f78c7,#484e94)}
+.pro-m{background:linear-gradient(135deg,#b06fa8,#744a78)}
+.traz-m{background:linear-gradient(135deg,#3e91aa,#2c617b)}
+.cose-m{background:linear-gradient(135deg,#bd8052,#82543c)}
+.audit-m{background:linear-gradient(135deg,#9d72bd,#654a7b)}
+.map-m{background:linear-gradient(135deg,#51a87d,#327358)}
+.report-m{background:linear-gradient(135deg,#617f9f,#405b76)}
+.other-m{background:linear-gradient(135deg,#727b85,#4d555e)}
+
+.scroll-indicator{
+    text-align:right;
+    font-size:10px;
+    opacity:.65;
+    margin:7px 3px 0;
+}
+
+/* ===== PIE ===== */
+
+.footer{
+    text-align:center;
+    margin-top:18px;
+    font-size:9px;
+    opacity:.55;
+}
+
+/* ===== DESKTOP ===== */
+
+@media(min-width:700px){
+    .container{
+        width:680px;
+        padding-top:28px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .temperature{
+        grid-column:span 1;
+        min-height:145px;
+        display:block;
+    }
+
+    .temperature .temp-right{
+        position:absolute;
+        right:14px;
+        bottom:14px;
+    }
+
+    .modules{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="sun"></div>
+    <div class="wave"></div>
+    <div class="wave wave2"></div>
+
+    <main class="container">
+
+        <!-- CABECERA SIOA -->
+        <header class="header">
+
+            <div class="logo">
+                <!-- Concha SIOA -->
+                <svg viewBox="0 0 64 64" fill="none">
+                    <path d="M10 43C12 25 22 12 32 12C42 12 52 25 54 43C43 51 21 51 10 43Z"
+                          fill="rgba(255,235,196,.88)"
+                          stroke="white"
+                          stroke-width="2"/>
+                    <path d="M32 14V45M23 18C25 27 26 36 26 47M41 18C39 27 38 36 38 47M17 27C21 31 23 38 23 48M47 27C43 31 41 38 41 48"
+                          stroke="#a76d55"
+                          stroke-width="1.7"
+                          stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <div class="title">
+                <h1>SISTEMA INTEGRAL DE<br>OPERACIONES ACUÍCOLAS</h1>
+                <span>SIOA</span>
+            </div>
+
+        </header>
+
+        <!-- SALUDO -->
+        <section class="greeting">
+            <h2>Hola Luis Alberto</h2>
+            <div class="date" id="fechaActual"></div>
+        </section>
+
+        <!-- RESUMEN -->
+        <div class="section-title">Resumen general</div>
+
+        <section class="cards">
+
+            <!-- TARJETA 1 -->
+            <article class="card">
+
+                <div class="card-head">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M8 6h13M8 12h13M8 18h13"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                            <path d="M3 6l1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    BIOSPACT SAC
+                </div>
+
+                <div class="value">33</div>
+                <div class="unit">Lotes</div>
+
+                <div class="secondary">
+                    Chululos acumulados
+                    <strong>19,500</strong>
+                    <small>Chululos</small>
+                </div>
+
+            </article>
+
+
+            <!-- TARJETA 2 -->
+            <article class="card">
+
+                <div class="card-head">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 18C6 9 9 5 12 5C15 5 18 9 20 18"
+                                  stroke-width="1.8"
+                                  stroke-linecap="round"/>
+                            <path d="M6 17C9 14 15 14 18 17"
+                                  stroke-width="1.8"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    Stock actual
+                </div>
+
+                <div class="value">36,795</div>
+                <div class="unit">Manojos</div>
+
+            </article>
+
+
+            <!-- TARJETA 3 -->
+            <article class="card">
+
+                <div class="card-head">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 19V10M12 19V6M19 19V3"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                            <path d="M3 20h18"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    Stock acumulado
+                </div>
+
+                <div class="value">—</div>
+                <div class="unit">Manojos fondo</div>
+
+                <div class="secondary">
+                    Acumulado histórico
+                    <strong>Manojos Fondo</strong>
+                </div>
+
+            </article>
+
+
+            <!-- TARJETA 4 -->
+            <article class="card">
+
+                <div class="card-head">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 19V9M10 19V5M16 19V11M22 19V3"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    Sistemas en uso
+                </div>
+
+                <div class="value">1,853</div>
+                <div class="unit">Sistemas</div>
+
+                <div class="secondary">
+                    Líneas ocupadas
+                    <strong>30.53</strong>
+                    <small>Líneas</small>
+                </div>
+
+            </article>
+
+
+            <!-- TARJETA 5 -->
+            <article class="card">
+
+                <div class="card-head">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 20V4M5 4l14 4-14 4"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    Líneas vacías
+                </div>
+
+                <div class="value">99.47</div>
+                <div class="unit">Líneas</div>
+
+                <div class="secondary">
+                    Capacidad ociosa
+                    <strong>76%</strong>
+                </div>
+
+            </article>
+
+
+            <!-- TARJETA 6 -->
+            <article class="card temperature">
+
+                <div>
+                    <div class="card-head">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
+                                      stroke-width="1.8"/>
+                                <path d="M12 11v6"
+                                      stroke-width="2"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        Temperatura media
+                    </div>
+
+                    <div class="value">19.40</div>
+                    <div class="unit">°C · profundidad media</div>
+                </div>
+
+                <div class="temp-right">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
+                              stroke-width="1.7"/>
+                        <path d="M12 11v6"
+                              stroke-width="2"
+                              stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- MODULOS -->
+        <section class="modules-wrap">
+
+            <div class="section-title">Módulos operativos</div>
+
+            <div class="modules">
+
+                <button class="module" onclick="abrirModulo('Temperatura')">
+                    <div class="micon temp-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
+                                  stroke-width="1.8"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Temperatura</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Operaciones')">
+                    <div class="micon oper-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v18M3 12h18M5 5l14 14M19 5 5 19"
+                                  stroke-width="1.7"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Operaciones</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('BIOSPACT SAC')">
+                    <div class="micon bio-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 18C5 10 8 5 12 5s7 5 8 13"
+                                  stroke-width="1.8"/>
+                            <path d="M7 16c3-2 7-2 10 0"
+                                  stroke-width="1.8"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">BIOSPACT SAC</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Stock')">
+                    <div class="micon stock-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 20V10M10 20V6M16 20V12M22 20V3"
+                                  stroke-width="2"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Stock</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Prospecciones')">
+                    <div class="micon pro-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="10" cy="10" r="6"
+                                    stroke-width="1.8"/>
+                            <path d="m15 15 5 5"
+                                    stroke-width="2"
+                                    stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Prospecciones</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Trazabilidad')">
+                    <div class="micon traz-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7h6v6H4zM14 4h6v6h-6zM14 14h6v6h-6zM4 17h6"
+                                  stroke-width="1.7"/>
+                            <path d="M10 10h4M17 10v4"
+                                  stroke-width="1.7"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Trazabilidad</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Cosechas')">
+                    <div class="micon cose-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 18h16M6 18V9h12v9M8 9V6h8v3"
+                                  stroke-width="1.7"/>
+                            <path d="M9 13h6"
+                                  stroke-width="1.7"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Cosechas</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Auditorías')">
+                    <div class="micon audit-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M6 3h12v18H6z"
+                                  stroke-width="1.7"/>
+                            <path d="m9 12 2 2 4-5"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Auditorías</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Mapa de ubicación')">
+                    <div class="micon map-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2V6Z"
+                                  stroke-width="1.7"/>
+                            <path d="M9 4v14M15 6v14"
+                                  stroke-width="1.7"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Mapa de áreas</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Reportes')">
+                    <div class="micon report-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M6 3h9l3 3v15H6z"
+                                  stroke-width="1.7"/>
+                            <path d="M14 3v4h4M9 12h6M9 16h6"
+                                  stroke-width="1.7"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Reportes</div>
+                </button>
+
+                <button class="module" onclick="abrirModulo('Otros')">
+                    <div class="micon other-m">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="5" cy="12" r="1.5"/>
+                            <circle cx="12" cy="12" r="1.5"/>
+                            <circle cx="19" cy="12" r="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Otros</div>
+                </button>
+
+            </div>
+
+            <div class="scroll-indicator">
+                ↕ Desliza para ver todos los módulos
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            SIOA · Sistema Integral de Operaciones Acuícolas
+        </footer>
+
+    </main>
+</div>
+
+
+<script>
+
+/* ===== FECHA AUTOMÁTICA DEL DISPOSITIVO ===== */
+
+function actualizarFecha(){
+
+    const ahora = new Date();
+
+    const opciones = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        weekday: 'long'
+    };
+
+    const fecha = ahora.toLocaleDateString('es-ES', opciones);
+
+    const fechaCapitalizada =
+        fecha.charAt(0).toUpperCase() + fecha.slice(1);
+
+    document.getElementById('fechaActual').innerHTML =
+        '📅 Actualizado al ' + fechaCapitalizada;
+}
+
+actualizarFecha();
+
+
+/* ===== NAVEGACIÓN DE MÓDULOS ===== */
+
+function abrirModulo(modulo){
+
+    /*
+      Por ahora mostramos el módulo seleccionado.
+      En la siguiente etapa conectaremos cada módulo
+      con su dashboard y/o formulario correspondiente.
+    */
+
+    alert(
+        'Módulo: ' + modulo +
+        '\n\nLa navegación del módulo será conectada en la siguiente etapa.'
+    );
+}
+
+</script>
+
+</body>
+</html>
