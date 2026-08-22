@@ -33,20 +33,17 @@ body{
     background:
         linear-gradient(
             to bottom,
-            rgba(8,48,70,.25),
-            rgba(4,30,43,.78)
+            rgba(6,25,38,.35),
+            rgba(4,20,30,.55)
         ),
-        linear-gradient(
-            to bottom,
-            #f19b66 0%,
-            #d66f58 17%,
-            #236078 38%,
-            #0b4057 62%,
-            #061f2d 100%
-        );
+        url("fondo_atardecer.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
 .app:before{
+    display:none;
     content:"";
     position:absolute;
     left:-10%;
@@ -79,6 +76,7 @@ body{
 }
 
 .sun{
+    display:none;
     position:absolute;
     width:88px;
     height:88px;
