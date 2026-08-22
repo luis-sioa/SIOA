@@ -160,6 +160,7 @@ body{
     letter-spacing:2px;
     opacity:.88;
     color:#5ec8e8;
+    font-weight:800;
 }
 
 /* ===== SALUDO ===== */
@@ -178,6 +179,11 @@ body{
     font-size:12px;
     opacity:.9;
 }
+   
+.date-highlight{
+    color:#ffc94d;
+    font-weight:700;
+}
 
 /* ===== PORTADA ===== */
 
@@ -186,7 +192,9 @@ body{
     text-transform:uppercase;
     letter-spacing:1.8px;
     margin:16px 2px 9px;
-    opacity:.82;
+    opacity:1;
+    color:#5ec8e8;
+    font-weight:800;
 }
 
 /* ===== TARJETAS ===== */
@@ -199,14 +207,14 @@ body{
 
 .card{
     min-height:145px;
-    border-radius:19px;
-    padding:14px;
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.28);
-    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:16px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(16px);
     box-shadow:
-        0 10px 25px rgba(0,0,0,.20),
-        inset 0 1px 0 rgba(255,255,255,.12);
+        0 12px 30px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.10);
     position:relative;
     overflow:hidden;
 }
@@ -376,6 +384,13 @@ body{
 .map-m{background:linear-gradient(135deg,#51a87d,#327358)}
 .report-m{background:linear-gradient(135deg,#617f9f,#405b76)}
 .other-m{background:linear-gradient(135deg,#727b85,#4d555e)}
+    
+    .icon-bio{background:linear-gradient(135deg,#46a477,#27775b);border-color:transparent;}
+.icon-stock{background:linear-gradient(135deg,#6f78c7,#484e94);border-color:transparent;}
+.icon-stockacc{background:linear-gradient(135deg,#617f9f,#405b76);border-color:transparent;}
+.icon-sistemas{background:linear-gradient(135deg,#df8d3e,#b75a2e);border-color:transparent;}
+.icon-lineas{background:linear-gradient(135deg,#b06fa8,#744a78);border-color:transparent;}
+.icon-temp{background:linear-gradient(135deg,#2486a6,#17617e);border-color:transparent;}
 
 .scroll-indicator{
     text-align:right;
@@ -464,7 +479,7 @@ body{
             <article class="card">
 
                 <div class="card-head">
-                    <div class="icon">
+                    <div class="icon icon-bio">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M8 6h13M8 12h13M8 18h13"
                                   stroke-width="2"
@@ -494,7 +509,7 @@ body{
             <article class="card">
 
                 <div class="card-head">
-                    <div class="icon">
+                    <div class="icon icon-stock">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M4 18C6 9 9 5 12 5C15 5 18 9 20 18"
                                   stroke-width="1.8"
@@ -517,7 +532,7 @@ body{
             <article class="card">
 
                 <div class="card-head">
-                    <div class="icon">
+                    <div class="icon icon-stockacc">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M5 19V10M12 19V6M19 19V3"
                                   stroke-width="2"
@@ -545,7 +560,7 @@ body{
             <article class="card">
 
                 <div class="card-head">
-                    <div class="icon">
+                    <div class="icon icon-sistemas">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M4 19V9M10 19V5M16 19V11M22 19V3"
                                   stroke-width="2"
@@ -571,7 +586,7 @@ body{
             <article class="card">
 
                 <div class="card-head">
-                    <div class="icon">
+                    <div class="icon icon-lineas">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M5 20V4M5 4l14 4-14 4"
                                   stroke-width="2"
@@ -598,7 +613,7 @@ body{
 
                 <div>
                     <div class="card-head">
-                        <div class="icon">
+                        <div class="icon icon-temp">
                             <svg viewBox="0 0 24 24" fill="none">
                                 <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
                                       stroke-width="1.8"/>
@@ -805,8 +820,7 @@ function actualizarFecha(){
         fecha.charAt(0).toUpperCase() + fecha.slice(1);
 
     document.getElementById('fechaActual').innerHTML =
-        '📅 Actualizado al ' + fechaCapitalizada;
-}
+    '📅 Actualizado al <span class="date-highlight">' + fechaCapitalizada + '</span>';
 
 actualizarFecha();
 
