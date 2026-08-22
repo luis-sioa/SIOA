@@ -30,18 +30,28 @@ body{
     min-height:100vh;
     position:relative;
     overflow:hidden;
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(6,25,38,.35),
-            rgba(4,20,30,.55)
-        ),
-        url("fondo_atardecer.jpg");
+    background:#0a1f2c;
+}
+    .hero-bg{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:300px;
+    background-image:url("fondo_atardecer.jpg");
     background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background-position:85% 15%;
 }
 
+.hero-bg:after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:70%;
+    background:linear-gradient(to bottom, rgba(10,31,44,0) 0%, #0a1f2c 100%);
+}
 .app:before{
     display:none;
     content:"";
@@ -90,6 +100,7 @@ body{
 }
 
 .wave{
+    display:none;
     position:absolute;
     left:-5%;
     width:110%;
@@ -442,7 +453,8 @@ body{
 <body>
 
 <div class="app">
-
+    
+    <div class="hero-bg"></div>
     <div class="sun"></div>
     <div class="wave"></div>
     <div class="wave wave2"></div>
