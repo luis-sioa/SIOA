@@ -340,22 +340,27 @@ body{
 }
 
 .modules{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 .module{
-    min-height:91px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    min-height:64px;
     border:0;
-    border-radius:17px;
+    border-radius:16px;
     color:white;
-    padding:10px 7px;
+    padding:12px 16px;
     cursor:pointer;
-    background:rgba(255,255,255,.13);
-    border:1px solid rgba(255,255,255,.22);
-    backdrop-filter:blur(9px);
-    box-shadow:0 8px 18px rgba(0,0,0,.16);
+    text-align:left;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(14px);
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
     transition:.2s;
 }
 
@@ -364,9 +369,9 @@ body{
 }
 
 .module .micon{
-    width:38px;
-    height:38px;
-    margin:auto;
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
     border-radius:12px;
     display:flex;
     align-items:center;
@@ -380,10 +385,17 @@ body{
 }
 
 .module-name{
-    margin-top:7px;
-    font-size:10px;
+    font-size:14px;
     font-weight:700;
-    line-height:1.1;
+    line-height:1.2;
+    flex:1;
+}
+    .module-arrow{
+    width:20px;
+    height:20px;
+    flex:0 0 20px;
+    opacity:.5;
+    color:white;
 }
 
 .temp-m{background:linear-gradient(135deg,#2486a6,#17617e)}
@@ -663,144 +675,175 @@ body{
 
             <div class="section-title">Módulos operativos</div>
 
-            <div class="modules">
+           <div class="modules">
 
-                <button class="module" onclick="abrirModulo('Temperatura')">
-                    <div class="micon temp-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
-                                  stroke-width="1.8"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Temperatura</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Temperatura')">
+        <div class="micon temp-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3a3 3 0 0 0-3 3v8.2a5 5 0 1 0 6 0V6a3 3 0 0 0-3-3Z"
+                      stroke-width="1.8"/>
+            </svg>
+        </div>
+        <div class="module-name">Temperatura</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Operaciones')">
-                    <div class="micon oper-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 3v18M3 12h18M5 5l14 14M19 5 5 19"
-                                  stroke-width="1.7"
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Operaciones</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Operaciones')">
+        <div class="micon oper-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v18M3 12h18M5 5l14 14M19 5 5 19"
+                      stroke-width="1.7"
+                      stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="module-name">Operaciones</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('BIOSPACT SAC')">
-                    <div class="micon bio-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 18C5 10 8 5 12 5s7 5 8 13"
-                                  stroke-width="1.8"/>
-                            <path d="M7 16c3-2 7-2 10 0"
-                                  stroke-width="1.8"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">BIOSPACT SAC</div>
-                </button>
+    <button class="module" onclick="abrirModulo('BIOSPACT SAC')">
+        <div class="micon bio-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 18C5 10 8 5 12 5s7 5 8 13"
+                      stroke-width="1.8"/>
+                <path d="M7 16c3-2 7-2 10 0"
+                      stroke-width="1.8"/>
+            </svg>
+        </div>
+        <div class="module-name">BIOSPACT SAC</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Stock')">
-                    <div class="micon stock-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 20V10M10 20V6M16 20V12M22 20V3"
-                                  stroke-width="2"
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Stock</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Stock')">
+        <div class="micon stock-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 20V10M10 20V6M16 20V12M22 20V3"
+                      stroke-width="2"
+                      stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="module-name">Stock</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Prospecciones')">
-                    <div class="micon pro-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <circle cx="10" cy="10" r="6"
-                                    stroke-width="1.8"/>
-                            <path d="m15 15 5 5"
-                                    stroke-width="2"
-                                    stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Prospecciones</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Prospecciones')">
+        <div class="micon pro-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="10" cy="10" r="6"
+                        stroke-width="1.8"/>
+                <path d="m15 15 5 5"
+                        stroke-width="2"
+                        stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="module-name">Prospecciones</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Trazabilidad')">
-                    <div class="micon traz-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7h6v6H4zM14 4h6v6h-6zM14 14h6v6h-6zM4 17h6"
-                                  stroke-width="1.7"/>
-                            <path d="M10 10h4M17 10v4"
-                                  stroke-width="1.7"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Trazabilidad</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Trazabilidad')">
+        <div class="micon traz-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h6v6H4zM14 4h6v6h-6zM14 14h6v6h-6zM4 17h6"
+                      stroke-width="1.7"/>
+                <path d="M10 10h4M17 10v4"
+                      stroke-width="1.7"/>
+            </svg>
+        </div>
+        <div class="module-name">Trazabilidad</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Cosechas')">
-                    <div class="micon cose-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 18h16M6 18V9h12v9M8 9V6h8v3"
-                                  stroke-width="1.7"/>
-                            <path d="M9 13h6"
-                                  stroke-width="1.7"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Cosechas</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Cosechas')">
+        <div class="micon cose-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 18h16M6 18V9h12v9M8 9V6h8v3"
+                      stroke-width="1.7"/>
+                <path d="M9 13h6"
+                      stroke-width="1.7"/>
+            </svg>
+        </div>
+        <div class="module-name">Cosechas</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Auditorías')">
-                    <div class="micon audit-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M6 3h12v18H6z"
-                                  stroke-width="1.7"/>
-                            <path d="m9 12 2 2 4-5"
-                                  stroke-width="2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Auditorías</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Auditorías')">
+        <div class="micon audit-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 3h12v18H6z"
+                      stroke-width="1.7"/>
+                <path d="m9 12 2 2 4-5"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="module-name">Auditorías</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Mapa de ubicación')">
-                    <div class="micon map-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2V6Z"
-                                  stroke-width="1.7"/>
-                            <path d="M9 4v14M15 6v14"
-                                  stroke-width="1.7"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Mapa de áreas</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Mapa de ubicación')">
+        <div class="micon map-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2V6Z"
+                      stroke-width="1.7"/>
+                <path d="M9 4v14M15 6v14"
+                      stroke-width="1.7"/>
+            </svg>
+        </div>
+        <div class="module-name">Mapa de áreas</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Reportes')">
-                    <div class="micon report-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M6 3h9l3 3v15H6z"
-                                  stroke-width="1.7"/>
-                            <path d="M14 3v4h4M9 12h6M9 16h6"
-                                  stroke-width="1.7"
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Reportes</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Reportes')">
+        <div class="micon report-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 3h9l3 3v15H6z"
+                      stroke-width="1.7"/>
+                <path d="M14 3v4h4M9 12h6M9 16h6"
+                      stroke-width="1.7"
+                      stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="module-name">Reportes</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-                <button class="module" onclick="abrirModulo('Otros')">
-                    <div class="micon other-m">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <circle cx="5" cy="12" r="1.5"/>
-                            <circle cx="12" cy="12" r="1.5"/>
-                            <circle cx="19" cy="12" r="1.5"/>
-                        </svg>
-                    </div>
-                    <div class="module-name">Otros</div>
-                </button>
+    <button class="module" onclick="abrirModulo('Otros')">
+        <div class="micon other-m">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="5" cy="12" r="1.5"/>
+                <circle cx="12" cy="12" r="1.5"/>
+                <circle cx="19" cy="12" r="1.5"/>
+            </svg>
+        </div>
+        <div class="module-name">Otros</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-            </div>
-
-            <div class="scroll-indicator">
+</div>
                 ↕ Desliza para ver todos los módulos
-            </div>
+    
 
         </section>
 
