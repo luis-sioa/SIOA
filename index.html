@@ -409,7 +409,7 @@ body{
 .map-m{background:linear-gradient(135deg,#51a87d,#327358)}
 .report-m{background:linear-gradient(135deg,#617f9f,#405b76)}
 .other-m{background:linear-gradient(135deg,#727b85,#4d555e)}
-    
+    .lineas-m{background:linear-gradient(135deg,#d9534f,#a53a3a)}
     .icon-bio{background:linear-gradient(135deg,#46a477,#27775b);border-color:transparent;}
 .icon-stock{background:linear-gradient(135deg,#6f78c7,#484e94);border-color:transparent;}
 .icon-stockacc{background:linear-gradient(135deg,#617f9f,#405b76);border-color:transparent;}
@@ -571,26 +571,25 @@ body{
             </article>
 
 
-            <!-- TARJETA 5 -->
+                       <!-- TARJETA 5 -->
             <article class="card">
 
                 <div class="card-head">
                    <div class="icon icon-lineas">
     <span style="font-size:20px;">🚩</span>
                     </div>
-                    Líneas vacías
+                    Capacidad ociosa
                 </div>
 
-                <div class="value">99.47</div>
-                <div class="unit">Líneas</div>
+                <div class="value">76%</div>
 
                 <div class="secondary">
-                    Capacidad ociosa
-                    <strong>76%</strong>
+                    Líneas vacías
+                    <strong>99.47</strong>
+                    <small>Líneas</small>
                 </div>
 
             </article>
-
 
             <!-- TARJETA 6 -->
             <article class="card temperature">
@@ -664,6 +663,16 @@ body{
            <span style="font-size:22px;">📈</span>
         </div>
         <div class="module-name">Stock</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+                   <button class="module" onclick="abrirModulo('Líneas')">
+        <div class="micon lineas-m">
+           <span style="font-size:22px;">🚩</span>
+        </div>
+        <div class="module-name">Líneas</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
             <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
