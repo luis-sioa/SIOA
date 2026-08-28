@@ -809,6 +809,31 @@ function abrirModulo(modulo){
 
 const URL_RESUMEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMtFAWFh41XMQxeJmIQ5c8L4X_c8JwQcgIC7xl7vC5N8oRn0qJWxmCqmFtgnQVn0LIkkImVkvMZHAZ/pub?gid=259384413&single=true&output=csv";
 
+function parseLineaCSV(linea){
+    const resultado = [];
+    let actual = "";
+    let dentroComillas = false;
+
+    for(let i = 0; i < linea.length; i++){
+        const c = linea[i];
+        if(c === '"'){
+            dentroComillas = !dentroComillas;
+        } else if(c === ',' && !dentroComillas){
+            resultado.push(actual);
+            actual = "";
+        } else {
+            actual += c;
+        }
+    }
+    resultado.push(actual);
+    return resultado;
+}
+
+function normalizarDecimal(valor){
+    if(valor === undefined) return valor;
+    return valor.replace(",", ".");
+}
+
 function actualizarDatosSIOA(){
 
     fetch(URL_RESUMEN)
@@ -819,7 +844,7 @@ function actualizarDatosSIOA(){
             const datos = {};
 
             filas.forEach(function(fila){
-                const partes = fila.split(",");
+                const partes = parseLineaCSV(fila);
                 if(partes.length >= 2){
                     const etiqueta = partes[0].trim();
                     const valor = partes[1].trim();
@@ -833,16 +858,15 @@ function actualizarDatosSIOA(){
             asignar("val-stock-acumulado", datos["Stock Acumulado Total"]);
             asignar("val-sistemas", datos["Sistemas en Uso"]);
             asignar("val-lineas-ocupadas", datos["Lineas Ocupadas"]);
-            asignar("val-capacidad-ociosa", datos["Capacidad Ociosa"]);
+            asignar("val-capacidad-ociosa", normalizarDecimal(datos["Capacidad Ociosa"]));
             asignar("val-lineas-vacias", datos["Lineas Vacias"]);
-            asignar("val-temperatura", datos["Temperatura Media"]);
+            asignar("val-temperatura", normalizarDecimal(datos["Temperatura Media"]));
 
         })
         .catch(function(error){
             console.log("No se pudo actualizar SIOA:", error);
         });
 }
-
 function asignar(id, valor){
     const el = document.getElementById(id);
     if(el && valor !== undefined){
