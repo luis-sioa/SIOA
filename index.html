@@ -333,8 +333,23 @@ body{
     stroke:white;
 }
 
-    .temp-triple{
+   .temp-triple{
     grid-column:span 2;
+    min-height:auto;
+    position:relative;
+    overflow:hidden;
+}
+
+.temp-triple:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(255,159,67,.16) 0%,
+        rgba(62,145,170,.14) 50%,
+        rgba(23,97,126,.18) 100%
+    );
 }
 
 .temp-cols{
@@ -902,6 +917,9 @@ function parseLineaCSV(linea){
 function normalizarDecimal(valor){
     if(valor === undefined) return valor;
     return valor.replace(",", ".");
+} function limpiarNumero(valor){
+    if(valor === undefined) return valor;
+    return valor.replace(/[^0-9.,\-]/g, "");
 }
 
 function actualizarDatosSIOA(){
@@ -931,9 +949,9 @@ function actualizarDatosSIOA(){
             asignar("val-capacidad-ociosa", normalizarDecimal(datos["Capacidad Ociosa"]));
             asignar("val-lineas-vacias", datos["Lineas Vacias"]);
             asignar("val-temperatura", normalizarDecimal(datos["Temperatura Media"]));
-            asignar("val-temp-sup", normalizarDecimal(datos["Temperatura Superficie"]));
-            asignar("val-temp-med", normalizarDecimal(datos["Temperatura Media"]));
-            asignar("val-temp-fon", normalizarDecimal(datos["Temperatura Fondo"]));
+            asignar("val-temp-sup", normalizarDecimal(limpiarNumero(datos["Temperatura Superficie"])));
+asignar("val-temp-med", normalizarDecimal(limpiarNumero(datos["Temperatura Media"])));
+asignar("val-temp-fon", normalizarDecimal(limpiarNumero(datos["Temperatura Fondo"])));
         })
         .catch(function(error){
             console.log("No se pudo actualizar SIOA:", error);
