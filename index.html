@@ -931,7 +931,9 @@ function actualizarDatosSIOA(){
             asignar("val-capacidad-ociosa", normalizarDecimal(datos["Capacidad Ociosa"]));
             asignar("val-lineas-vacias", datos["Lineas Vacias"]);
             asignar("val-temperatura", normalizarDecimal(datos["Temperatura Media"]));
-
+            asignar("val-temp-sup", normalizarDecimal(datos["Temperatura Superficie"]));
+            asignar("val-temp-med", normalizarDecimal(datos["Temperatura Media"]));
+            asignar("val-temp-fon", normalizarDecimal(datos["Temperatura Fondo"]));
         })
         .catch(function(error){
             console.log("No se pudo actualizar SIOA:", error);
