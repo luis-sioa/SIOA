@@ -340,17 +340,6 @@ body{
     overflow:hidden;
 }
 
-.temp-triple:before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        90deg,
-        rgba(255,159,67,.16) 0%,
-        rgba(62,145,170,.14) 50%,
-        rgba(23,97,126,.18) 100%
-    );
-}
 
 .temp-cols{
     display:flex;
@@ -404,6 +393,33 @@ body{
     margin:2px 6px;
 }
 
+    .temp-chart-wrap{
+    margin-top:12px;
+    height:40px;
+}
+
+.temp-chart-wrap svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.temp-divider-h{
+    height:1px;
+    background:rgba(255,255,255,.14);
+    margin:10px 0 8px;
+}
+
+.temp-diff{
+    font-size:11px;
+    color:rgba(255,255,255,.7);
+    text-align:center;
+}
+
+.temp-diff strong{
+    color:white;
+    font-weight:700;
+}
 /* ===== MODULOS ===== */
 
 .modules-wrap{
@@ -702,6 +718,32 @@ body{
 
                 </div>
 
+                                <div class="temp-chart-wrap">
+                    <svg id="temp-chart-svg" viewBox="0 0 300 46" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#f4914f"/>
+                                <stop offset="35%" stop-color="#3e91aa"/>
+                                <stop offset="100%" stop-color="#3e91aa"/>
+                            </linearGradient>
+                            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#3e91aa" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#3e91aa" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <path id="temp-area-path" fill="url(#areaGrad)" stroke="none"/>
+                        <path id="temp-line-path" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle id="temp-dot-sup" r="4" fill="#f4914f"/>
+                        <circle id="temp-dot-med" r="4" fill="#3e91aa"/>
+                        <circle id="temp-dot-fon" r="4" fill="#3e91aa"/>
+                    </svg>
+                </div>
+
+                <div class="temp-divider-h"></div>
+
+                <div class="temp-diff">
+                    Diferencial Térmico Sup-Fon.: <strong id="val-temp-diff">0.1 °C</strong>
+                </div>
             </article>
 
         </section>
@@ -922,6 +964,53 @@ function normalizarDecimal(valor){
     return valor.replace(/[^0-9.,\-]/g, "");
 }
 
+    function actualizarGraficoTemp(){
+
+    const supTxt = document.getElementById("val-temp-sup").textContent;
+    const medTxt = document.getElementById("val-temp-med").textContent;
+    const fonTxt = document.getElementById("val-temp-fon").textContent;
+
+    const s = parseFloat(supTxt);
+    const m = parseFloat(medTxt);
+    const f = parseFloat(fonTxt);
+
+    if(isNaN(s) || isNaN(m) || isNaN(f)) return;
+
+    const min = Math.min(s, m, f) - 0.15;
+    const max = Math.max(s, m, f) + 0.15;
+    const rango = (max - min) || 1;
+
+    const alto = 46;
+    const x0 = 15, x1 = 150, x2 = 285;
+
+    function calcY(v){
+        return alto - ((v - min) / rango) * alto;
+    }
+
+    const y0 = calcY(s);
+    const y1 = calcY(m);
+    const y2 = calcY(f);
+
+    const dLinea =
+        "M " + x0 + "," + y0 +
+        " C " + ((x0+x1)/2) + "," + y0 + " " + ((x0+x1)/2) + "," + y1 + " " + x1 + "," + y1 +
+        " C " + ((x1+x2)/2) + "," + y1 + " " + ((x1+x2)/2) + "," + y2 + " " + x2 + "," + y2;
+
+    const dArea = dLinea + " L " + x2 + "," + alto + " L " + x0 + "," + alto + " Z";
+
+    document.getElementById("temp-line-path").setAttribute("d", dLinea);
+    document.getElementById("temp-area-path").setAttribute("d", dArea);
+
+    document.getElementById("temp-dot-sup").setAttribute("cx", x0);
+    document.getElementById("temp-dot-sup").setAttribute("cy", y0);
+    document.getElementById("temp-dot-med").setAttribute("cx", x1);
+    document.getElementById("temp-dot-med").setAttribute("cy", y1);
+    document.getElementById("temp-dot-fon").setAttribute("cx", x2);
+    document.getElementById("temp-dot-fon").setAttribute("cy", y2);
+
+    const diff = (s - f).toFixed(1);
+    document.getElementById("val-temp-diff").textContent = diff + " °C";
+}
 function actualizarDatosSIOA(){
 
     fetch(URL_RESUMEN)
@@ -952,6 +1041,7 @@ function actualizarDatosSIOA(){
             asignar("val-temp-sup", normalizarDecimal(limpiarNumero(datos["Temperatura Superficie"])));
 asignar("val-temp-med", normalizarDecimal(limpiarNumero(datos["Temperatura Media"])));
 asignar("val-temp-fon", normalizarDecimal(limpiarNumero(datos["Temperatura Fondo"])));
+                     actualizarGraficoTemp();   
         })
         .catch(function(error){
             console.log("No se pudo actualizar SIOA:", error);
