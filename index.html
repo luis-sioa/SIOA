@@ -932,17 +932,21 @@ actualizarFecha();
 
 function abrirModulo(modulo){
 
-    /*
-      Por ahora mostramos el módulo seleccionado.
-      En la siguiente etapa conectaremos cada módulo
-      con su dashboard y/o formulario correspondiente.
-    */
+    const enlacesPowerBI = {
+        'Temperatura': 'https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/f483f71e800c8a0a9e31?experience=power-bi'
+    };
+
+    if(enlacesPowerBI[modulo]){
+        window.open(enlacesPowerBI[modulo], '_blank');
+        return;
+    }
 
     alert(
         'Módulo: ' + modulo +
         '\n\nLa navegación del módulo será conectada en la siguiente etapa.'
     );
-}/* ===== CONEXIÓN CON DATOS REALES (RESUMEN_SIOA) ===== */
+}
+    /* ===== CONEXIÓN CON DATOS REALES (RESUMEN_SIOA) ===== */
 
 const URL_RESUMEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMtFAWFh41XMQxeJmIQ5c8L4X_c8JwQcgIC7xl7vC5N8oRn0qJWxmCqmFtgnQVn0LIkkImVkvMZHAZ/pub?gid=259384413&single=true&output=csv";
 
