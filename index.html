@@ -529,6 +529,23 @@ body{
     font-size:9px;
     opacity:.55;
 }
+        <div class="modal-overlay" id="moduloOverlay" onclick="cerrarModuloMenu(event)">
+        <div class="modulo-sheet">
+            <div class="modulo-sheet-title" id="moduloTitulo">Módulo</div>
+
+            <a class="modulo-opcion" id="btnFormulario" target="_blank">
+                <span class="modulo-opcion-icon">📝</span>
+                <span>Formulario de registro</span>
+            </a>
+
+            <a class="modulo-opcion" id="btnDashboard" target="_blank">
+                <span class="modulo-opcion-icon">📊</span>
+                <span>Ver dashboard</span>
+            </a>
+
+            <button class="modulo-cancelar" onclick="cerrarModuloMenu(event)">Cancelar</button>
+        </div>
+    </div>
 
 /* ===== DESKTOP ===== */
 
@@ -896,6 +913,23 @@ body{
         <footer class="footer">
             SIOA · Sistema Integral de Operaciones Acuícolas
         </footer>
+            <div class="modal-overlay" id="moduloOverlay" onclick="cerrarModuloMenu(event)">
+        <div class="modulo-sheet">
+            <div class="modulo-sheet-title" id="moduloTitulo">Módulo</div>
+
+            <a class="modulo-opcion" id="btnFormulario" target="_blank">
+                <span class="modulo-opcion-icon">📝</span>
+                <span>Formulario de registro</span>
+            </a>
+
+            <a class="modulo-opcion" id="btnDashboard" target="_blank">
+                <span class="modulo-opcion-icon">📊</span>
+                <span>Ver dashboard</span>
+            </a>
+
+            <button class="modulo-cancelar" onclick="cerrarModuloMenu(event)">Cancelar</button>
+        </div>
+    </div>
 
     </main>
 </div>
@@ -930,21 +964,35 @@ actualizarFecha();
 
 /* ===== NAVEGACIÓN DE MÓDULOS ===== */
 
+const modulosData = {
+    'Temperatura': {
+        formulario: 'https://tally.so/r/eqz75k',
+        dashboard: 'https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/ReportSectionc5bca5620a719b11cf3b?experience=power-bi'
+    }
+};
+
 function abrirModulo(modulo){
 
-    const enlacesPowerBI = {
-        'Temperatura': 'https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/f483f71e800c8a0a9e31?experience=power-bi'
-    };
+    const datos = modulosData[modulo];
 
-    if(enlacesPowerBI[modulo]){
-        window.open(enlacesPowerBI[modulo], '_blank');
+    if(!datos){
+        alert(
+            'Módulo: ' + modulo +
+            '\n\nLa navegación del módulo será conectada en la siguiente etapa.'
+        );
         return;
     }
 
-    alert(
-        'Módulo: ' + modulo +
-        '\n\nLa navegación del módulo será conectada en la siguiente etapa.'
-    );
+    document.getElementById('moduloTitulo').textContent = modulo;
+    document.getElementById('btnFormulario').href = datos.formulario;
+    document.getElementById('btnDashboard').href = datos.dashboard;
+    document.getElementById('moduloOverlay').classList.add('activo');
+}
+
+function cerrarModuloMenu(evento){
+    if(evento.target.id === 'moduloOverlay' || evento.target.classList.contains('modulo-cancelar')){
+        document.getElementById('moduloOverlay').classList.remove('activo');
+    }
 }
     /* ===== CONEXIÓN CON DATOS REALES (RESUMEN_SIOA) ===== */
 
