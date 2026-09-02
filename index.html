@@ -313,8 +313,14 @@ body{
     justify-content:space-between;
 }
 
-.temperature .value{
-    font-size:34px;
+.temp-value{
+    color:white;
+    font-size:17px;
+    font-weight:800;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    gap:2px;
 }
 
 .temperature .temp-right{
@@ -340,7 +346,9 @@ body{
     overflow:hidden;
     padding:14px 16px;
 }
-
+.temp-triple .card-head{
+    margin-bottom:2px;
+}
 
 .temp-cols{
     display:flex;
@@ -359,7 +367,7 @@ body{
     align-items:center;
     justify-content:center;
     gap:6px;
-    margin-bottom:8px;
+    margin-bottom:4px;
 }
 
 .temp-icon{
@@ -395,9 +403,9 @@ body{
     margin:2px 6px;
 }
 
-  .temp-chart-wrap{
-    margin-top:6px;
-    height:34px;
+ .temp-chart-wrap{
+    margin-top:4px;
+    height:28px;
 }
 
 .temp-chart-wrap svg{
@@ -409,7 +417,7 @@ body{
 .temp-divider-h{
     height:1px;
     background:rgba(255,255,255,.14);
-    margin:8px 0 6px;
+    margin:6px 0 4px;
 }
 
 .temp-diff{
