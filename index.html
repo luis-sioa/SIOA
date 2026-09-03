@@ -597,24 +597,7 @@ body{
     font-size:9px;
     opacity:.55;
 }
-        <div class="modal-overlay" id="moduloOverlay" onclick="cerrarModuloMenu(event)">
-        <div class="modulo-sheet">
-            <div class="modulo-sheet-title" id="moduloTitulo">Módulo</div>
-
-            <a class="modulo-opcion" id="btnFormulario" target="_blank">
-                <span class="modulo-opcion-icon">📝</span>
-                <span>Formulario de registro</span>
-            </a>
-
-            <a class="modulo-opcion" id="btnDashboard" target="_blank">
-                <span class="modulo-opcion-icon">📊</span>
-                <span>Ver dashboard</span>
-            </a>
-
-            <button class="modulo-cancelar" onclick="cerrarModuloMenu(event)">Cancelar</button>
-        </div>
-    </div>
-
+       
 /* ===== DESKTOP ===== */
 
 @media(min-width:700px){
@@ -1029,39 +1012,29 @@ actualizarFecha();
 /* ===== NAVEGACIÓN DE MÓDULOS ===== */
 
 const modulosData = {
-  temperatura: {
+  'Temperatura': {
     titulo: "Temperatura en Cultivo",
-    registro: "https://tally.so/r/eqz75k",
+    formulario: "https://tally.so/r/eqz75k",
     dashboard: "https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/ReportSectionc5bca5620a719b11cf3b?experience=power-bi"
   }
 };
 
-function abrirModulo(key) {
-  const data = modulosData[key];
-  if (data) {
-    document.getElementById('modal-titulo').innerText = data.titulo;
-    document.getElementById('btn-registro').href = data.registro;
-    document.getElementById('btn-dashboard').href = data.dashboard;
+function abrirModulo(modulo){
+  const datos = modulosData[modulo];
+
+  if(datos){
+    document.getElementById('modal-titulo').textContent = datos.titulo || modulo;
+    document.getElementById('btn-registro').href = datos.formulario;
+    document.getElementById('btn-dashboard').href = datos.dashboard;
     document.getElementById('modal-modulo').style.display = 'flex';
+  } else {
+    alert('Módulo: ' + modulo + '\n\nLa navegación del módulo será conectada en la siguiente etapa.');
   }
 }
 
-function cerrarModuloMenu() {
+function cerrarModuloMenu(){
   document.getElementById('modal-modulo').style.display = 'none';
 }
-    document.getElementById('moduloTitulo').textContent = modulo;
-    document.getElementById('btnFormulario').href = datos.formulario;
-    document.getElementById('btnDashboard').href = datos.dashboard;
-    document.getElementById('moduloOverlay').classList.add('activo');
-}
-
-function cerrarModuloMenu(evento){
-    if(evento.target.id === 'moduloOverlay' || evento.target.classList.contains('modulo-cancelar')){
-        document.getElementById('moduloOverlay').classList.remove('activo');
-    }
-}
-    /* ===== CONEXIÓN CON DATOS REALES (RESUMEN_SIOA) ===== */
-
 const URL_RESUMEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMtFAWFh41XMQxeJmIQ5c8L4X_c8JwQcgIC7xl7vC5N8oRn0qJWxmCqmFtgnQVn0LIkkImVkvMZHAZ/pub?gid=259384413&single=true&output=csv";
 
 function parseLineaCSV(linea){
