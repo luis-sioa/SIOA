@@ -854,15 +854,7 @@ body{
         </svg>
     </button>
 
-    <button class="module" onclick="abrirModulo('BIOSPACT SAC')">
-        <div class="micon bio-m">
-            <span style="font-size:22px;">🔬</span>
-        </div>
-        <div class="module-name">BIOSPACT SAC</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+    
 
     <button class="module" onclick="abrirModulo('Stock')">
         <div class="micon stock-m">
@@ -965,15 +957,15 @@ body{
             SIOA · Sistema Integral de Operaciones Acuícolas
         </footer>
           <!-- Modal de Opciones de Módulo -->
+<!-- Modal de Opciones de Módulo -->
 <div id="modal-modulo" class="modal-overlay" style="display: none;">
   <div class="modulo-sheet">
-    <h3 id="modal-titulo">Temperatura</h3>
-    <a id="btn-registro" href="#" target="_blank" class="modulo-opcion">
-      <span>📝</span> Formulario de registro
-    </a>
-    <a id="btn-dashboard" href="#" target="_blank" class="modulo-opcion">
-      <span>📊</span> Ver dashboard
-    </a>
+    <h3 id="modal-titulo">Módulo</h3>
+    
+    <div id="modal-opciones" style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Las opciones se cargan dinámicamente -->
+    </div>
+    
     <button type="button" class="btn-cancelar" onclick="cerrarModuloMenu()">Cancelar</button>
   </div>
 </div>
@@ -1014,18 +1006,39 @@ actualizarFecha();
 const modulosData = {
   'Temperatura': {
     titulo: "Temperatura en Cultivo",
-    formulario: "https://tally.so/r/eqz75k",
-    dashboard: "https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/ReportSectionc5bca5620a719b11cf3b?experience=power-bi"
+    opciones: [
+      { texto: "Formulario de registro", icono: "📝", url: "https://tally.so/r/eqz75k" },
+      { texto: "Ver dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/ReportSectionc5bca5620a719b11cf3b?experience=power-bi" }
+    ]
+  },
+  'Operaciones': {
+    titulo: "Operaciones Acuícolas",
+    opciones: [
+      { texto: "Registro, Ingreso de Semilla", icono: "📝", url: "https://tally.so/r/yPGxAx" },
+      { texto: "Registro, Desdoble de Semilla", icono: "📝", url: "https://tally.so/r/gDpLP4" },
+      { texto: "Registro, Siembra en Fondo", icono: "📝", url: "https://tally.so/r/gDpLM4" },
+      { texto: "Ver dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/e341089f-c714-4bdc-8afb-b58fda147418/4f9f6c495b166c84a684?experience=power-bi" }
+    ]
   }
 };
 
 function abrirModulo(modulo){
   const datos = modulosData[modulo];
+  const contenedor = document.getElementById('modal-opciones');
 
-  if(datos){
+  if(datos && contenedor){
     document.getElementById('modal-titulo').textContent = datos.titulo || modulo;
-    document.getElementById('btn-registro').href = datos.formulario;
-    document.getElementById('btn-dashboard').href = datos.dashboard;
+    contenedor.innerHTML = '';
+
+    datos.opciones.forEach(function(opt){
+      const enlace = document.createElement('a');
+      enlace.href = opt.url;
+      enlace.target = '_blank';
+      enlace.className = 'modulo-opcion';
+      enlace.innerHTML = '<span>' + opt.icono + '</span> ' + opt.texto;
+      contenedor.appendChild(enlace);
+    });
+
     document.getElementById('modal-modulo').style.display = 'flex';
   } else {
     alert('Módulo: ' + modulo + '\n\nLa navegación del módulo será conectada en la siguiente etapa.');
