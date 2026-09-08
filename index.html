@@ -565,16 +565,15 @@ body{
 
 .temp-m{background:linear-gradient(135deg,#2486a6,#17617e)}
 .oper-m{background:linear-gradient(135deg,#df8d3e,#b75a2e)}
-.bio-m{background:linear-gradient(135deg,#46a477,#27775b)}
+.lineas-m{background:linear-gradient(135deg,#e2e8f0,#cbd5e1); border:1px solid #94a3b8;} /* Fondo claro de alto contraste */
 .stock-m{background:linear-gradient(135deg,#6f78c7,#484e94)}
-.pro-m{background:linear-gradient(135deg,#b06fa8,#744a78)}
-.traz-m{background:linear-gradient(135deg,#3e91aa,#2c617b)}
 .cose-m{background:linear-gradient(135deg,#bd8052,#82543c)}
+.traz-m{background:linear-gradient(135deg,#0284c7,#0369a1); border:2px solid #38bdf8;} /* Contenedor circular resaltado */
 .audit-m{background:linear-gradient(135deg,#9d72bd,#654a7b)}
+.pro-m{background:linear-gradient(135deg,#b06fa8,#744a78)}
 .map-m{background:linear-gradient(135deg,#51a87d,#327358)}
 .report-m{background:linear-gradient(135deg,#617f9f,#405b76)}
 .other-m{background:linear-gradient(135deg,#727b85,#4d555e)}
-    .lineas-m{background:linear-gradient(135deg,#d9534f,#a53a3a)}
     .icon-bio{background:linear-gradient(135deg,#46a477,#27775b);border-color:transparent;}
 .icon-stock{background:linear-gradient(135deg,#6f78c7,#484e94);border-color:transparent;}
 .icon-stockacc{background:linear-gradient(135deg,#617f9f,#405b76);border-color:transparent;}
@@ -834,9 +833,12 @@ body{
 
            <div class="modules">
 
+  <div class="modules">
+
+    <!-- 1. TEMPERATURA (Termómetro mercurio rojo) -->
     <button class="module" onclick="abrirModulo('Temperatura')">
         <div class="micon temp-m">
-            <span style="font-size:22px;">🚨</span>
+            <span style="font-size:22px;">🌡️</span>
         </div>
         <div class="module-name">Temperatura</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
@@ -844,6 +846,7 @@ body{
         </svg>
     </button>
 
+    <!-- 2. OPERACIONES -->
     <button class="module" onclick="abrirModulo('Operaciones')">
         <div class="micon oper-m">
            <span style="font-size:22px;">🛠️</span>
@@ -854,8 +857,18 @@ body{
         </svg>
     </button>
 
-    
+    <!-- 3. LÍNEAS (Subió a 3.er lugar - Banderita fondo claro) -->
+    <button class="module" onclick="abrirModulo('Líneas')">
+        <div class="micon lineas-m">
+           <span style="font-size:22px;">🚩</span>
+        </div>
+        <div class="module-name" style="color:#0f172a; font-weight:800;">Líneas</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
+    <!-- 4. STOCK (Bajó a 4.º lugar) -->
     <button class="module" onclick="abrirModulo('Stock')">
         <div class="micon stock-m">
            <span style="font-size:22px;">📈</span>
@@ -866,36 +879,7 @@ body{
         </svg>
     </button>
 
-                   <button class="module" onclick="abrirModulo('Líneas')">
-        <div class="micon lineas-m">
-           <span style="font-size:22px;">🚩</span>
-        </div>
-        <div class="module-name">Líneas</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
-    <button class="module" onclick="abrirModulo('Prospecciones')">
-        <div class="micon pro-m">
-           <span style="font-size:22px;border:1.5px solid rgba(0,0,0,.55);border-radius:3px;padding:1px;line-height:1;">⬜</span>
-        </div>
-        <div class="module-name">Prospecciones</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
-    <button class="module" onclick="abrirModulo('Trazabilidad')">
-        <div class="micon traz-m">
-           <span style="font-size:22px;">🔍</span>
-        </div>
-        <div class="module-name">Trazabilidad</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
+    <!-- 5. COSECHAS -->
     <button class="module" onclick="abrirModulo('Cosechas')">
         <div class="micon cose-m">
             <span style="font-size:26px;">⛵</span>
@@ -906,9 +890,21 @@ body{
         </svg>
     </button>
 
+    <!-- 6. TRAZABILIDAD (Lupa fondo resalta) -->
+    <button class="module" onclick="abrirModulo('Trazabilidad')">
+        <div class="micon traz-m">
+           <span style="font-size:22px;">🔍</span>
+        </div>
+        <div class="module-name">Trazabilidad</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- 7. AUDITORÍAS (Tablilla con check light) -->
     <button class="module" onclick="abrirModulo('Auditorías')">
         <div class="micon audit-m">
-            <span style="font-size:22px;">📋</span>
+            <span style="font-size:22px;">📋✅</span>
         </div>
         <div class="module-name">Auditorías</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
@@ -916,9 +912,21 @@ body{
         </svg>
     </button>
 
+    <!-- 8. PROSPECCIONES -->
+    <button class="module" onclick="abrirModulo('Prospecciones')">
+        <div class="micon pro-m">
+           <span style="font-size:22px;">🎯</span>
+        </div>
+        <div class="module-name">Prospecciones</div>
+        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- 9. MAPA DE ÁREAS -->
     <button class="module" onclick="abrirModulo('Mapa de ubicación')">
         <div class="micon map-m">
-            <span style="font-size:22px;">🌍</span>
+            <span style="font-size:22px;">🗺️</span>
         </div>
         <div class="module-name">Mapa de áreas</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
@@ -926,6 +934,7 @@ body{
         </svg>
     </button>
 
+    <!-- 10. REPORTES -->
     <button class="module" onclick="abrirModulo('Reportes')">
         <div class="micon report-m">
             <span style="font-size:22px;">📄</span>
@@ -936,6 +945,7 @@ body{
         </svg>
     </button>
 
+    <!-- 11. OTROS -->
     <button class="module" onclick="abrirModulo('Otros')">
         <div class="micon other-m">
            <span style="font-size:22px;">⋯</span>
@@ -946,6 +956,7 @@ body{
         </svg>
     </button>
 
+</div>
 </div>
                 ↕ Desliza para ver todos los módulos
     
@@ -1018,6 +1029,14 @@ const modulosData = {
       { texto: "Registro, Desdoble de Semilla", icono: "📝", url: "https://tally.so/r/gDpLP4" },
       { texto: "Registro, Siembra en Fondo", icono: "📝", url: "https://tally.so/r/gDpLM4" },
       { texto: "Ver dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/e341089f-c714-4bdc-8afb-b58fda147418/4f9f6c495b166c84a684?experience=power-bi" }
+    ]
+  },
+  'Líneas': {
+    titulo: "Módulo de Registro de Líneas",
+    opciones: [
+      { texto: "Registro de Desdoble", icono: "📝", url: "https://tally.so/r/2EWEKA" },
+      { texto: "Registro de Siembra", icono: "📝", url: "https://tally.so/r/dWMWKK" },
+      { texto: "Ver Dashboard de Líneas", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/c2322029-7ed9-4fa6-88a6-302d3ba644ee/2fb791bb6c19f3437b6a?experience=power-bi" }
     ]
   }
 };
