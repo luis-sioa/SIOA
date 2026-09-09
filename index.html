@@ -1071,6 +1071,9 @@ function abrirModulo(modulo){
       enlace.target = '_blank';
       enlace.className = 'modulo-opcion';
       enlace.innerHTML = '<span>' + opt.icono + '</span> ' + opt.texto;
+     enlace.onclick = function() {
+        cerrarModuloMenu();
+      };
       contenedor.appendChild(enlace);
     });
 
