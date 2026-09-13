@@ -931,39 +931,38 @@ body{
     </button>
 
    
-   <!-- 9. MAPA DE ÁREAS -->
-    <button class="module" onclick="abrirModulo('Mapa de ubicación')">
+<!-- 9. UBICACIÓN DE ÁREAS -->
+    <button class="module" onclick="abrirModulo('Ubicación de Áreas')">
         <div class="micon map-m">
             <span style="font-size:22px;">🌍</span>
         </div>
-        <div class="module-name">Mapa de áreas</div>
+        <div class="module-name">Ubicación de Áreas</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
             <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
 
-    <!-- 10. REPORTES -->
-    <button class="module" onclick="abrirModulo('Reportes')">
+    <!-- 10. ANÁLISIS AGENTE IA -->
+    <button class="module" onclick="abrirModulo('Análisis Agente IA')">
         <div class="micon report-m">
-            <span style="font-size:22px;">📄</span>
+            <span style="font-size:22px;">🤖</span>
         </div>
-        <div class="module-name">Reportes</div>
+        <div class="module-name">Análisis Agente IA</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
             <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
 
-    <!-- 11. OTROS -->
-    <button class="module" onclick="abrirModulo('Otros')">
+    <!-- 11. REPORTES IA -->
+    <button class="module" onclick="abrirModulo('Reportes IA')">
         <div class="micon other-m">
-           <span style="font-size:22px;">⋯</span>
+            <span style="font-size:22px;">✨</span>
         </div>
-        <div class="module-name">Otros</div>
+        <div class="module-name">Reportes IA</div>
         <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
             <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
-
 </div>
 </div>
                 ↕ Desliza para ver todos los módulos
@@ -1055,16 +1054,10 @@ const modulosData = {
       { texto: "Ver Dashboard", icono: "📈", url: "https://app.powerbi.com/groups/me/reports/ef336025-1a6e-42db-8381-620745c37533/f2f02538f62835a58006?experience=power-bi" }
     ]
   },
- 'Auditorías': {
+'Auditorías': {
     titulo: "Módulo de Auditorías",
     opciones: [
       { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/0301ef02-0739-4fa0-ab9e-b7d833b9df48/ReportSection?experience=power-bi" }
-    ]
-  },
-  'Extracción': {
-    titulo: "Módulo de Cosecha / Extracción",
-    opciones: [
-      { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
     ]
   },
   'Cosecha': {
@@ -1073,9 +1066,16 @@ const modulosData = {
       { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
     ]
   },
+  'Extracción': {
+    titulo: "Módulo de Cosecha / Extracción",
+    opciones: [
+      { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
+    ]
+  },
   'Trazabilidad': {
     titulo: "Módulo de Trazabilidad",
     opciones: [
+      { texto: "Registro Google Sheets", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/12YWJU_0IAISVHZ1Uc-q9EwgJH_n2l4Gyape1IS0lxMo/edit?gid=825055531#gid=825055531" },
       { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/d1711f85-698f-4ade-8945-c5492155b7ff/ReportSection?experience=power-bi" }
     ]
   },
@@ -1085,9 +1085,26 @@ const modulosData = {
       { texto: "Prospecciones 2026", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/0b4e567a-d8f6-4266-a633-28f98f5fc20a/9bcdb9207ae444e277e2?experience=power-bi" },
       { texto: "Prospecciones 2025", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/ba897425-64a4-42cf-aaa5-dc16393bf2d8/9bcdb9207ae444e277e2?experience=power-bi" }
     ]
+  },
+  'Ubicación de Áreas': {
+    titulo: "Ubicación de Áreas",
+    opciones: [
+      { texto: "Ver Mapa / Ubicación", icono: "🌍", url: "#" }
+    ]
+  },
+  'Análisis Agente IA': {
+    titulo: "Análisis Agente IA",
+    opciones: [
+      { texto: "Consultar Agente IA", icono: "🤖", url: "#" }
+    ]
+  },
+  'Reportes IA': {
+    titulo: "Reportes IA",
+    opciones: [
+      { texto: "Generar Reporte IA", icono: "✨", url: "#" }
+    ]
   }
 };
-
 function abrirModulo(modulo){
   const datos = modulosData[modulo];
   const contenedor = document.getElementById('modal-opciones');
