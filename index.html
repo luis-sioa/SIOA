@@ -964,14 +964,15 @@ function procesarConsultaAgente() {
 const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
 
         const payload = new URLSearchParams();
-        payload.append("accion", "consultarAgente");
+        payload.append("accion", "consultar");
         payload.append("prompt", prompt);
 
-        fetch(webAppUrl, {
-          method: "POST",
-          mode: "cors",
-          redirect: "follow",
-          body: payload
+       fetch(webAppUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: payload
         })
           .then(res => res.json())
           .then(data => {
