@@ -968,21 +968,29 @@ const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6
         payload.append("prompt", prompt);
 fetch(webAppUrl, {
             method: "POST",
-            body: payload
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: payload.toString()
         })
-        .then(res => res.json())
-        .then(data => {
+        .then(res => res.text())
+        .then(text => {
             btn.disabled = false;
             btn.style.opacity = '1';
             cargando.style.display = 'none';
             respuestaDiv.style.display = 'block';
 
-            if (data.respuesta) {
-                respuestaDiv.innerText = data.respuesta;
-            } else if (typeof data === 'string') {
-                respuestaDiv.innerText = data;
-            } else {
-                respuestaDiv.innerText = JSON.stringify(data, null, 2);
+            try {
+                const data = JSON.parse(text);
+                if (data.respuesta) {
+                    respuestaDiv.innerText = data.respuesta;
+                } else if (data.estado) {
+                    respuestaDiv.innerText = data.estado;
+                } else {
+                    respuestaDiv.innerText = JSON.stringify(data, null, 2);
+                }
+            } catch (e) {
+                respuestaDiv.innerText = text;
             }
         })
         .catch(err => {
