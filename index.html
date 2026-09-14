@@ -1093,11 +1093,11 @@ const modulosData = {
     ]
   },
   'Análisis Agente IA': {
-    titulo: "Análisis Agente IA",
-    opciones: [
-      { texto: "Consultar Agente IA", icono: "🤖", url: "#" }
-    ]
-  },
+      titulo: "Análisis Agente IA",
+      opciones: [
+        { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
+      ]
+    },
   'Reportes IA': {
     titulo: "Reportes IA",
     opciones: [
@@ -1105,6 +1105,118 @@ const modulosData = {
     ]
   }
 };
+    function abrirPantallaAgente() {
+  const contenedor = document.getElementById('modal-opciones');
+  if (!contenedor) return;
+contenedor.innerHTML = `
+    <div style="padding: 10px; font-family: sans-serif;">
+      <p style="color: #555; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
+      
+      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #ccc; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
+      
+      <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
+        🔍 Consultar Agente IA
+      </button>
+
+      <div id="cargandoAgente" style="display:none; text-align:center; color:#0d6efd; font-weight:bold; margin-top:15px; font-size:13px;">
+        ⏳ El Agente SIOA está analizando los datos y redactando el informe...
+      </div>
+
+      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#f8f9fa; padding:12px; border-radius:8px; border:1px solid #dee2e6; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
+      </div>
+    </div>
+  `;
+}
+
+function procesarConsultaAgente() {
+  const prompt = document.getElementById('promptAgenteInput').value;
+  const btn = document.getElementById('btnEnviarConsulta');
+  const cargando = document.getElementById('cargandoAgente');
+  const respuestaDiv = document.getElementById('respuestaAgenteDiv');
+
+  if (!prompt.trim()) {
+    alert("Ingresa una consulta para el Agente.");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  cargando.style.display = 'block';
+  respuestaDiv.style.display = 'none';
+
+  const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+
+  fetch(webAppUrl + "?prompt=" + encodeURIComponent(prompt))
+    .then(res => res.text())
+    .then(data => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      respuestaDiv.style.display = 'block';
+      respuestaDiv.innerText = data;
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      alert("Error al conectar con el Agente SIOA: " + err);
+    });
+}
+  contenedor.innerHTML = `
+    <div style="padding: 10px; font-family: sans-serif;">
+      <p style="color: #555; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
+      
+      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #ccc; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
+      
+      <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
+        🔍 Consultar Agente IA
+      </button>
+
+      <div id="cargandoAgente" style="display:none; text-align:center; color:#0d6efd; font-weight:bold; margin-top:15px; font-size:13px;">
+        ⏳ El Agente SIOA está analizando los datos y redactando el informe...
+      </div>
+
+      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#f8f9fa; padding:12px; border-radius:8px; border:1px solid #dee2e6; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
+      </div>
+    </div>
+  `;
+}
+
+function procesarConsultaAgente() {
+  const prompt = document.getElementById('promptAgenteInput').value;
+  const btn = document.getElementById('btnEnviarConsulta');
+  const cargando = document.getElementById('cargandoAgente');
+  const respuestaDiv = document.getElementById('respuestaAgenteDiv');
+
+  if (!prompt.trim()) {
+    alert("Ingresa una consulta para el Agente.");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  cargando.style.display = 'block';
+  respuestaDiv.style.display = 'none';
+
+  // URL de la Web App desplegada en Apps Script
+  const webAppUrl = "URL_DE_TU_WEB_APP_SCRIPT";
+
+  fetch(webAppUrl + "?prompt=" + encodeURIComponent(prompt))
+    .then(res => res.text())
+    .then(data => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      respuestaDiv.style.display = 'block';
+      respuestaDiv.innerText = data;
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      alert("Error al conectar con el Agente SIOA: " + err);
+    });
+}
 function abrirModulo(modulo){
   const datos = modulosData[modulo];
   const contenedor = document.getElementById('modal-opciones');
