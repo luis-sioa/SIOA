@@ -961,24 +961,41 @@ function procesarConsultaAgente() {
   cargando.style.display = 'block';
   respuestaDiv.style.display = 'none';
 
-  const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+ const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
 
-  fetch(webAppUrl + "?prompt=" + encodeURIComponent(prompt))
-    .then(res => res.text())
-    .then(data => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
-      respuestaDiv.style.display = 'block';
-      respuestaDiv.innerText = data;
-    })
-    .catch(err => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
-      alert("Error al conectar con el Agente SIOA: " + err);
-    });
-}
+        fetch(webAppUrl, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify({
+            accion: "consultarAgente",
+            prompt: prompt
+          })
+        })
+          .then(res => res.json())
+          .then(data => {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            cargando.style.display = 'none';
+            respuestaDiv.style.display = 'block';
+            
+            if (data.respuesta) {
+              respuestaDiv.innerText = data.respuesta;
+            } else if (typeof data === 'string') {
+              respuestaDiv.innerText = data;
+            } else {
+              respuestaDiv.innerText = JSON.stringify(data);
+            }
+          })
+          .catch(err => {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            cargando.style.display = 'none';
+            alert("Error al conectar con el Agente SIOA: " + err);
+          });
+      }
 </script>
 
 </body>
