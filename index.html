@@ -670,12 +670,12 @@ body{
 
                 <div class="card-head">
                     <div class="icon icon-bio">
-    <span style="font-size:20px;">🔬</span>
-</div>                    
+                        <span style="font-size:20px;">🔬</span>
+                    </div>                    
                     BIOSPACT SAC
                 </div>
 
-                                <div class="value" id="val-lotes">33</div>
+                <div class="value" id="val-lotes">33</div>
                 <div class="unit">Lotes</div>
 
                 <div class="secondary">
@@ -686,44 +686,38 @@ body{
 
             </article>
 
-
             <!-- TARJETA 2 -->
-           <!-- TARJETA 2 -->
-<article class="card">
+            <article class="card">
 
-    <div class="card-head">
-        <div class="icon icon-stock">
-            <span style="font-size:20px;">📈</span>
-        </div>
-        Stock actual
-    </div>
+                <div class="card-head">
+                    <div class="icon icon-stock">
+                        <span style="font-size:20px;">📈</span>
+                    </div>
+                    Stock actual
+                </div>
 
-        <div class="value" id="val-stock-actual">36,795</div>
-    <div class="unit">Manojos</div>
+                <div class="value" id="val-stock-actual">36,795</div>
+                <div class="unit">Manojos</div>
 
-    <div class="secondary">
-        Stock acumulado
-        <strong id="val-stock-acumulado">—</strong>
-        <small>Manojos</small>
-    </div>
+                <div class="secondary">
+                    Stock acumulado
+                    <strong id="val-stock-acumulado">—</strong>
+                    <small>Manojos</small>
+                </div>
 
-</article>
-
-
-           
-
+            </article>
 
             <!-- TARJETA 4 -->
             <article class="card">
 
                 <div class="card-head">
                     <div class="icon icon-sistemas">
-    <span style="font-size:20px;">⚙️</span>
+                        <span style="font-size:20px;">⚙️</span>
                     </div>
                     Sistemas en uso
                 </div>
 
-                               <div class="value" id="val-sistemas">1,853</div>
+                <div class="value" id="val-sistemas">1,853</div>
                 <div class="unit">Sistemas</div>
 
                 <div class="secondary">
@@ -734,18 +728,17 @@ body{
 
             </article>
 
-
-                       <!-- TARJETA 5 -->
+            <!-- TARJETA 5 -->
             <article class="card">
 
                 <div class="card-head">
-                   <div class="icon icon-lineas">
-    <span style="font-size:20px;">🚩</span>
+                    <div class="icon icon-lineas">
+                        <span style="font-size:20px;">🚩</span>
                     </div>
                     Capacidad ociosa
                 </div>
 
-                                <div class="value" id="val-capacidad-ociosa">76%</div>
+                <div class="value" id="val-capacidad-ociosa">76%</div>
                 <div class="unit">Cultivo</div>
 
                 <div class="secondary">
@@ -756,7 +749,7 @@ body{
 
             </article>
 
-                      <!-- TARJETA TEMPERATURA -->
+            <!-- TARJETA TEMPERATURA -->
             <article class="card temp-triple">
 
                 <div class="card-head">
@@ -795,7 +788,7 @@ body{
 
                 </div>
 
-                                <div class="temp-chart-wrap">
+                <div class="temp-chart-wrap">
                     <svg id="temp-chart-svg" viewBox="0 0 300 46" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
@@ -825,181 +818,170 @@ body{
 
         </section>
 
-
         <!-- MODULOS -->
         <section class="modules-wrap">
 
             <div class="section-title">Módulos operativos</div>
 
-           <div class="modules">
+            <div class="modules">
 
-  <div class="modules">
+                <!-- 1. TEMPERATURA -->
+                <button class="module" onclick="abrirModulo('Temperatura')">
+                    <div class="micon temp-m">
+                        <span style="font-size:22px;">🌡️</span>
+                    </div>
+                    <div class="module-name">Temperatura</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 1. TEMPERATURA (Termómetro mercurio rojo) -->
-    <button class="module" onclick="abrirModulo('Temperatura')">
-        <div class="micon temp-m">
-            <span style="font-size:22px;">🌡️</span>
-        </div>
-        <div class="module-name">Temperatura</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 2. OPERACIONES -->
+                <button class="module" onclick="abrirModulo('Operaciones')">
+                    <div class="micon oper-m">
+                       <span style="font-size:22px;">🛠️</span>
+                    </div>
+                    <div class="module-name">Operaciones</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 2. OPERACIONES -->
-    <button class="module" onclick="abrirModulo('Operaciones')">
-        <div class="micon oper-m">
-           <span style="font-size:22px;">🛠️</span>
-        </div>
-        <div class="module-name">Operaciones</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 3. LÍNEAS -->
+                <button class="module" onclick="abrirModulo('Líneas')">
+                    <div class="micon lineas-m">
+                       <span style="font-size:22px;">🚩</span>
+                    </div>
+                   <div class="module-name">Líneas</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 3. LÍNEAS (Subió a 3.er lugar - Banderita fondo claro) -->
-    <button class="module" onclick="abrirModulo('Líneas')">
-        <div class="micon lineas-m">
-           <span style="font-size:22px;">🚩</span>
-        </div>
-       <div class="module-name">Líneas</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 4. STOCK -->
+                <button class="module" onclick="abrirModulo('Stock')">
+                    <div class="micon stock-m">
+                       <span style="font-size:22px;">📈</span>
+                    </div>
+                    <div class="module-name">Stock</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 4. STOCK (Bajó a 4.º lugar) -->
-    <button class="module" onclick="abrirModulo('Stock')">
-        <div class="micon stock-m">
-           <span style="font-size:22px;">📈</span>
-        </div>
-        <div class="module-name">Stock</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 5. COSECHAS -->
+                <button class="module" onclick="abrirModulo('Cosecha')">
+                    <div class="micon cose-m">
+                        <span style="font-size:26px;">⛵</span>
+                    </div>
+                    <div class="module-name">Cosechas</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 5. COSECHAS -->
-    <button class="module" onclick="abrirModulo('Cosecha')">
-        <div class="micon cose-m">
-            <span style="font-size:26px;">⛵</span>
-        </div>
-        <div class="module-name">Cosechas</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 6. TRAZABILIDAD -->
+                <button class="module" onclick="abrirModulo('Trazabilidad')">
+                    <div class="micon traz-m">
+                       <span style="font-size:22px;">🔍</span>
+                    </div>
+                    <div class="module-name">Trazabilidad</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 6. TRAZABILIDAD (Lupa fondo resalta) -->
-    <button class="module" onclick="abrirModulo('Trazabilidad')">
-        <div class="micon traz-m">
-           <span style="font-size:22px;">🔍</span>
-        </div>
-        <div class="module-name">Trazabilidad</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 7. AUDITORÍAS -->
+                <button class="module" onclick="abrirModulo('Auditorías')">
+                    <div class="micon audit-m">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="5" y="3" width="14" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/>
+                          <path d="M9 3H15V5H9V3Z" fill="white"/>
+                          <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="module-name">Auditorías</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-   <!-- 7. AUDITORÍAS (Tablilla con check verde dentro) -->
-    <button class="module" onclick="abrirModulo('Auditorías')">
-        <div class="micon audit-m">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Tablero -->
-              <rect x="5" y="3" width="14" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/>
-              <!-- Clip Superior -->
-              <path d="M9 3H15V5H9V3Z" fill="white"/>
-              <!-- Check Verde Dentro del Tablero -->
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-        <div class="module-name">Auditorías</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 8. PROSPECCIONES -->
+                <button class="module" onclick="abrirModulo('Prospecciones')">
+                    <div class="micon pro-m">
+                       <span style="font-size:22px;">🎯</span>
+                    </div>
+                    <div class="module-name">Prospecciones</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 8. PROSPECCIONES -->
-    <button class="module" onclick="abrirModulo('Prospecciones')">
-        <div class="micon pro-m">
-           <span style="font-size:22px;">🎯</span>
-        </div>
-        <div class="module-name">Prospecciones</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 9. UBICACIÓN DE ÁREAS -->
+                <button class="module" onclick="abrirModulo('Ubicación de Áreas')">
+                    <div class="micon map-m">
+                        <span style="font-size:22px;">🌍</span>
+                    </div>
+                    <div class="module-name">Ubicación de Áreas</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-   
-<!-- 9. UBICACIÓN DE ÁREAS -->
-    <button class="module" onclick="abrirModulo('Ubicación de Áreas')">
-        <div class="micon map-m">
-            <span style="font-size:22px;">🌍</span>
-        </div>
-        <div class="module-name">Ubicación de Áreas</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 10. ANÁLISIS AGENTE IA -->
+                <button class="module" onclick="abrirModulo('Análisis Agente IA')">
+                    <div class="micon report-m">
+                        <span style="font-size:22px;">🤖</span>
+                    </div>
+                    <div class="module-name">Análisis Agente IA</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 10. ANÁLISIS AGENTE IA -->
-    <button class="module" onclick="abrirModulo('Análisis Agente IA')">
-        <div class="micon report-m">
-            <span style="font-size:22px;">🤖</span>
-        </div>
-        <div class="module-name">Análisis Agente IA</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+                <!-- 11. REPORTES IA -->
+                <button class="module" onclick="abrirModulo('Reportes IA')">
+                    <div class="micon other-m">
+                        <span style="font-size:22px;">✨</span>
+                    </div>
+                    <div class="module-name">Reportes IA</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-    <!-- 11. REPORTES IA -->
-    <button class="module" onclick="abrirModulo('Reportes IA')">
-        <div class="micon other-m">
-            <span style="font-size:22px;">✨</span>
-        </div>
-        <div class="module-name">Reportes IA</div>
-        <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-</div>
-</div>
-                ↕ Desliza para ver todos los módulos
-    
+            </div>
+
+            <div class="scroll-indicator">↕ Desliza para ver todos los módulos</div>
 
         </section>
-
 
         <footer class="footer">
             SIOA · Sistema Integral de Operaciones Acuícolas
         </footer>
-          <!-- Modal de Opciones de Módulo -->
-<!-- Modal de Opciones de Módulo -->
-<div id="modal-modulo" class="modal-overlay" style="display: none;">
-  <div class="modulo-sheet">
-    <h3 id="modal-titulo">Módulo</h3>
-    
-    <div id="modal-opciones" style="display: flex; flex-direction: column; gap: 12px;">
-      <!-- Las opciones se cargan dinámicamente -->
-    </div>
-    
-    <button type="button" class="btn-cancelar" onclick="cerrarModuloMenu()">Cancelar</button>
-  </div>
-</div>
+
+        <!-- Modal de Opciones de Módulo -->
+        <div id="modal-modulo" class="modal-overlay" style="display: none;">
+          <div class="modulo-sheet">
+            <h3 id="modal-titulo">Módulo</h3>
+            
+            <div id="modal-opciones" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Las opciones se cargan dinámicamente -->
+            </div>
+            
+            <button type="button" class="btn-cancelar" onclick="cerrarModuloMenu()">Cancelar</button>
+          </div>
+        </div>
 
     </main>
 </div>
-
 
 <script>
 
 /* ===== FECHA AUTOMÁTICA DEL DISPOSITIVO ===== */
 
 function actualizarFecha(){
-
     const ahora = new Date();
-
     const opciones = {
         day: '2-digit',
         month: 'long',
@@ -1008,16 +990,13 @@ function actualizarFecha(){
     };
 
     const fecha = ahora.toLocaleDateString('es-ES', opciones);
+    const fechaCapitalizada = fecha.charAt(0).toUpperCase() + fecha.slice(1);
 
-    const fechaCapitalizada =
-        fecha.charAt(0).toUpperCase() + fecha.slice(1);
-
-       document.getElementById('fechaActual').innerHTML =
-    '📅 Actualizado al <span class="date-highlight">' + fechaCapitalizada + '</span>';
+    document.getElementById('fechaActual').innerHTML =
+        '📅 Actualizado al <span class="date-highlight">' + fechaCapitalizada + '</span>';
 }
     
 actualizarFecha();
-
 
 /* ===== NAVEGACIÓN DE MÓDULOS ===== */
 
@@ -1054,19 +1033,13 @@ const modulosData = {
       { texto: "Ver Dashboard", icono: "📈", url: "https://app.powerbi.com/groups/me/reports/ef336025-1a6e-42db-8381-620745c37533/f2f02538f62835a58006?experience=power-bi" }
     ]
   },
-'Auditorías': {
+  'Auditorías': {
     titulo: "Módulo de Auditorías",
     opciones: [
       { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/0301ef02-0739-4fa0-ab9e-b7d833b9df48/ReportSection?experience=power-bi" }
     ]
   },
   'Cosecha': {
-    titulo: "Módulo de Cosecha / Extracción",
-    opciones: [
-      { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
-    ]
-  },
-  'Extracción': {
     titulo: "Módulo de Cosecha / Extracción",
     opciones: [
       { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
@@ -1093,11 +1066,11 @@ const modulosData = {
     ]
   },
   'Análisis Agente IA': {
-      titulo: "Análisis Agente IA",
-      opciones: [
-        { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
-      ]
-    },
+    titulo: "Análisis Agente IA",
+    opciones: [
+      { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
+    ]
+  },
   'Reportes IA': {
     titulo: "Reportes IA",
     opciones: [
@@ -1105,24 +1078,57 @@ const modulosData = {
     ]
   }
 };
-    function abrirPantallaAgente() {
+
+function abrirModulo(modulo) {
+  const datos = modulosData[modulo];
+  const contenedor = document.getElementById('modal-opciones');
+  const modal = document.getElementById('modal-modulo');
+  
+  if (datos && contenedor && modal) {
+    document.getElementById('modal-titulo').textContent = datos.titulo || modulo;
+    contenedor.innerHTML = '';
+    
+    datos.opciones.forEach(opcion => {
+      const a = document.createElement('a');
+      a.className = 'modulo-opcion';
+      a.href = opcion.url;
+      if (opcion.url.startsWith('http')) {
+        a.target = '_blank';
+      }
+      a.innerHTML = `<span>${opcion.icono}</span> <span>${opcion.texto}</span>`;
+      contenedor.appendChild(a);
+    });
+    
+    modal.style.display = 'flex';
+  }
+}
+
+function cerrarModuloMenu() {
+  const modal = document.getElementById('modal-modulo');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function abrirPantallaAgente() {
   const contenedor = document.getElementById('modal-opciones');
   if (!contenedor) return;
-contenedor.innerHTML = `
+
+  contenedor.innerHTML = `
     <div style="padding: 10px; font-family: sans-serif;">
-      <p style="color: #555; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
+      <p style="color: #cbd5e1; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
       
-      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #ccc; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
+      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
       
       <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
         🔍 Consultar Agente IA
       </button>
 
-      <div id="cargandoAgente" style="display:none; text-align:center; color:#0d6efd; font-weight:bold; margin-top:15px; font-size:13px;">
+      <div id="cargandoAgente" style="display:none; text-align:center; color:#38bdf8; font-weight:bold; margin-top:15px; font-size:13px;">
         ⏳ El Agente SIOA está analizando los datos y redactando el informe...
       </div>
 
-      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#f8f9fa; padding:12px; border-radius:8px; border:1px solid #dee2e6; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
+      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
       </div>
     </div>
   `;
@@ -1162,226 +1168,6 @@ function procesarConsultaAgente() {
       alert("Error al conectar con el Agente SIOA: " + err);
     });
 }
-  contenedor.innerHTML = `
-    <div style="padding: 10px; font-family: sans-serif;">
-      <p style="color: #555; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
-      
-      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #ccc; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
-      
-      <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
-        🔍 Consultar Agente IA
-      </button>
-
-      <div id="cargandoAgente" style="display:none; text-align:center; color:#0d6efd; font-weight:bold; margin-top:15px; font-size:13px;">
-        ⏳ El Agente SIOA está analizando los datos y redactando el informe...
-      </div>
-
-      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#f8f9fa; padding:12px; border-radius:8px; border:1px solid #dee2e6; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
-      </div>
-    </div>
-  `;
-}
-
-function procesarConsultaAgente() {
-  const prompt = document.getElementById('promptAgenteInput').value;
-  const btn = document.getElementById('btnEnviarConsulta');
-  const cargando = document.getElementById('cargandoAgente');
-  const respuestaDiv = document.getElementById('respuestaAgenteDiv');
-
-  if (!prompt.trim()) {
-    alert("Ingresa una consulta para el Agente.");
-    return;
-  }
-
-  btn.disabled = true;
-  btn.style.opacity = '0.5';
-  cargando.style.display = 'block';
-  respuestaDiv.style.display = 'none';
-
-  // URL de la Web App desplegada en Apps Script
-  const webAppUrl = "URL_DE_TU_WEB_APP_SCRIPT";
-
-  fetch(webAppUrl + "?prompt=" + encodeURIComponent(prompt))
-    .then(res => res.text())
-    .then(data => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
-      respuestaDiv.style.display = 'block';
-      respuestaDiv.innerText = data;
-    })
-    .catch(err => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
-      alert("Error al conectar con el Agente SIOA: " + err);
-    });
-}
-function abrirModulo(modulo){
-  const datos = modulosData[modulo];
-  const contenedor = document.getElementById('modal-opciones');
-  
-  if(datos && contenedor){
-    document.getElementById('modal-titulo').textContent = datos.titulo || modulo;
-    contenedor.innerHTML = '';
-    
-    datos.opciones.forEach(function(opt){
-      const enlace = document.createElement('a');
-      enlace.href = opt.url;
-      // IMPORTANTE: Sin target='_blank' para mantener el flujo en la misma ventana
-      enlace.className = 'modulo-opcion';
-      enlace.innerHTML = '<span>' + opt.icono + '</span> ' + opt.texto;
-
-      contenedor.appendChild(enlace);
-    });
-    
-    // Mostramos el modal (2da interfaz)
-    document.getElementById('modal-modulo').style.display = 'flex';
-
-    // Creamos un punto en el historial para que el botón "Atrás" regrese a la 2da interfaz
-    if (history.state !== modulo) {
-      history.pushState({ moduloAbierto: modulo }, "", "#" + modulo);
-    }
-  } else {
-    alert('Módulo: ' + modulo + '\n\nLa navegación del módulo será conectada en la siguiente etapa.');
-  }
-}
-
-// Detectar cuando presiones la flecha "Atrás" del navegador
-window.onpopstate = function(event) {
-  if (event.state && event.state.moduloAbierto) {
-    // Si retrocedes desde un Tally/Sheet, reabre la 2da interfaz del módulo
-    abrirModulo(event.state.moduloAbierto);
-  } else {
-    // Si retrocedes estando en la 2da interfaz, cierra el modal y regresa a la portada SIOA
-    cerrarModuloMenu();
-  }
-};
-function cerrarModuloMenu(){
-  document.getElementById('modal-modulo').style.display = 'none';
-}
-const URL_RESUMEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMtFAWFh41XMQxeJmIQ5c8L4X_c8JwQcgIC7xl7vC5N8oRn0qJWxmCqmFtgnQVn0LIkkImVkvMZHAZ/pub?gid=259384413&single=true&output=csv";
-
-function parseLineaCSV(linea){
-    const resultado = [];
-    let actual = "";
-    let dentroComillas = false;
-
-    for(let i = 0; i < linea.length; i++){
-        const c = linea[i];
-        if(c === '"'){
-            dentroComillas = !dentroComillas;
-        } else if(c === ',' && !dentroComillas){
-            resultado.push(actual);
-            actual = "";
-        } else {
-            actual += c;
-        }
-    }
-    resultado.push(actual);
-    return resultado;
-}
-
-function normalizarDecimal(valor){
-    if(valor === undefined) return valor;
-    return valor.replace(",", ".");
-} function limpiarNumero(valor){
-    if(valor === undefined) return valor;
-    return valor.replace(/[^0-9.,\-]/g, "");
-}
-
-    function actualizarGraficoTemp(){
-
-    const supTxt = document.getElementById("val-temp-sup").textContent;
-    const medTxt = document.getElementById("val-temp-med").textContent;
-    const fonTxt = document.getElementById("val-temp-fon").textContent;
-
-    const s = parseFloat(supTxt);
-    const m = parseFloat(medTxt);
-    const f = parseFloat(fonTxt);
-
-    if(isNaN(s) || isNaN(m) || isNaN(f)) return;
-
-    const min = Math.min(s, m, f) - 0.15;
-    const max = Math.max(s, m, f) + 0.15;
-    const rango = (max - min) || 1;
-
-    const alto = 46;
-    const x0 = 15, x1 = 150, x2 = 285;
-
-    function calcY(v){
-        return alto - ((v - min) / rango) * alto;
-    }
-
-    const y0 = calcY(s);
-    const y1 = calcY(m);
-    const y2 = calcY(f);
-
-    const dLinea =
-        "M " + x0 + "," + y0 +
-        " C " + ((x0+x1)/2) + "," + y0 + " " + ((x0+x1)/2) + "," + y1 + " " + x1 + "," + y1 +
-        " C " + ((x1+x2)/2) + "," + y1 + " " + ((x1+x2)/2) + "," + y2 + " " + x2 + "," + y2;
-
-    const dArea = dLinea + " L " + x2 + "," + alto + " L " + x0 + "," + alto + " Z";
-
-    document.getElementById("temp-line-path").setAttribute("d", dLinea);
-    document.getElementById("temp-area-path").setAttribute("d", dArea);
-
-    document.getElementById("temp-dot-sup").setAttribute("cx", x0);
-    document.getElementById("temp-dot-sup").setAttribute("cy", y0);
-    document.getElementById("temp-dot-med").setAttribute("cx", x1);
-    document.getElementById("temp-dot-med").setAttribute("cy", y1);
-    document.getElementById("temp-dot-fon").setAttribute("cx", x2);
-    document.getElementById("temp-dot-fon").setAttribute("cy", y2);
-
-    const diff = (s - f).toFixed(1);
-    document.getElementById("val-temp-diff").textContent = diff + " °C";
-}
-function actualizarDatosSIOA(){
-
-    fetch(URL_RESUMEN)
-        .then(function(respuesta){ return respuesta.text(); })
-        .then(function(csv){
-
-            const filas = csv.split("\n");
-            const datos = {};
-
-            filas.forEach(function(fila){
-                const partes = parseLineaCSV(fila);
-                if(partes.length >= 2){
-                    const etiqueta = partes[0].trim();
-                    const valor = partes[1].trim();
-                    datos[etiqueta] = valor;
-                }
-            });
-
-            asignar("val-lotes", datos["Lotes BIOSPACT"]);
-            asignar("val-chululos", datos["Chululos Acumulados"]);
-            asignar("val-stock-actual", datos["Stock Actual"]);
-            asignar("val-stock-acumulado", datos["Stock Acumulado Total"]);
-            asignar("val-sistemas", datos["Sistemas en Uso"]);
-            asignar("val-lineas-ocupadas", datos["Lineas Ocupadas"]);
-            asignar("val-capacidad-ociosa", normalizarDecimal(datos["Capacidad Ociosa"]));
-            asignar("val-lineas-vacias", datos["Lineas Vacias"]);
-            asignar("val-temperatura", normalizarDecimal(datos["Temperatura Media"]));
-            asignar("val-temp-sup", normalizarDecimal(limpiarNumero(datos["Temperatura Superficie"])));
-asignar("val-temp-med", normalizarDecimal(limpiarNumero(datos["Temperatura Media"])));
-asignar("val-temp-fon", normalizarDecimal(limpiarNumero(datos["Temperatura Fondo"])));
-                     actualizarGraficoTemp();   
-        })
-        .catch(function(error){
-            console.log("No se pudo actualizar SIOA:", error);
-        });
-}
-function asignar(id, valor){
-    const el = document.getElementById(id);
-    if(el && valor !== undefined){
-        el.textContent = valor;
-    }
-}
-
-actualizarDatosSIOA();
-
 </script>
 
 </body>
