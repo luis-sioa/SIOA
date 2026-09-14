@@ -966,34 +966,31 @@ const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6
         const payload = new URLSearchParams();
         payload.append("accion", "consultar");
         payload.append("prompt", prompt);
-
-       fetch(webAppUrl, {
+fetch(webAppUrl, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
             body: payload
         })
-          .then(res => res.json())
-          .then(data => {
+        .then(res => res.json())
+        .then(data => {
             btn.disabled = false;
             btn.style.opacity = '1';
             cargando.style.display = 'none';
             respuestaDiv.style.display = 'block';
 
             if (data.respuesta) {
-              respuestaDiv.innerText = data.respuesta;
+                respuestaDiv.innerText = data.respuesta;
             } else if (typeof data === 'string') {
-              respuestaDiv.innerText = data;
+                respuestaDiv.innerText = data;
             } else {
-              respuestaDiv.innerText = JSON.stringify(data);
+                respuestaDiv.innerText = JSON.stringify(data, null, 2);
             }
-          })
-          .catch(err => {
+        })
+        .catch(err => {
             btn.disabled = false;
             btn.style.opacity = '1';
             cargando.style.display = 'none';
-            alert("Error al conectar con el Agente SIOA: " + err);
+            alert("Error al conectar con el Agente SIOA: " + err.message);
+        });
           });
       }
 </script>
