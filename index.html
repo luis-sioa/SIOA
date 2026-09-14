@@ -961,18 +961,17 @@ function procesarConsultaAgente() {
   cargando.style.display = 'block';
   respuestaDiv.style.display = 'none';
 
- const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+
+        const payload = new URLSearchParams();
+        payload.append("accion", "consultarAgente");
+        payload.append("prompt", prompt);
 
         fetch(webAppUrl, {
           method: "POST",
           mode: "cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify({
-            accion: "consultarAgente",
-            prompt: prompt
-          })
+          redirect: "follow",
+          body: payload
         })
           .then(res => res.json())
           .then(data => {
@@ -980,7 +979,7 @@ function procesarConsultaAgente() {
             btn.style.opacity = '1';
             cargando.style.display = 'none';
             respuestaDiv.style.display = 'block';
-            
+
             if (data.respuesta) {
               respuestaDiv.innerText = data.respuesta;
             } else if (typeof data === 'string') {
