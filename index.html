@@ -968,6 +968,7 @@ const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6
         payload.append("prompt", prompt);
 fetch(webAppUrl, {
             method: "POST",
+            redirect: "follow",
             headers: {
                 "Content-Type": "text/plain;charset=utf-8"
             },
