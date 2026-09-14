@@ -25,7 +25,7 @@
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* En móviles se muestra como panel inferior */
+  align-items: flex-end;
   z-index: 1000;
   backdrop-filter: blur(4px);
 }
@@ -100,7 +100,7 @@ body{
     overflow:hidden;
     background:#0a1f2c;
 }
-    .hero-bg{
+.hero-bg{
     position:absolute;
     top:0;
     right:0;
@@ -121,70 +121,6 @@ body{
         rgba(10,31,44,.5) 45%,
         #0a1f2c 80%
     );
-}
-.app:before{
-    display:none;
-    content:"";
-    position:absolute;
-    left:-10%;
-    right:-10%;
-    bottom:0;
-    height:42%;
-    background:
-        radial-gradient(
-            ellipse at 50% 100%,
-            #082d3c 0%,
-            #061d29 63%,
-            #04151e 100%
-        );
-    clip-path:polygon(
-        0 48%,
-        8% 39%,
-        15% 45%,
-        25% 28%,
-        35% 42%,
-        45% 24%,
-        54% 38%,
-        63% 18%,
-        74% 38%,
-        84% 25%,
-        100% 43%,
-        100% 100%,
-        0 100%
-    );
-    opacity:.95;
-}
-
-.sun{
-    display:none;
-    position:absolute;
-    width:88px;
-    height:88px;
-    border-radius:50%;
-    background:rgba(255,218,137,.9);
-    right:16%;
-    top:105px;
-    box-shadow:
-        0 0 35px rgba(255,205,111,.55),
-        0 0 75px rgba(255,166,85,.25);
-}
-
-.wave{
-    display:none;
-    position:absolute;
-    left:-5%;
-    width:110%;
-    height:100px;
-    bottom:24%;
-    border-radius:50%;
-    border-top:2px solid rgba(145,211,224,.25);
-    transform:rotate(-2deg);
-}
-
-.wave2{
-    bottom:20%;
-    opacity:.55;
-    transform:rotate(1deg);
 }
 
 /* ===== CONTENEDOR ===== */
@@ -221,7 +157,6 @@ body{
     object-fit:contain;
     display:block;
 }
-
 
 .title{
     line-height:1.08;
@@ -293,22 +228,9 @@ body{
     background:rgba(255,255,255,.07);
     border:1px solid rgba(255,255,255,.12);
     backdrop-filter:blur(20px);
-    box-shadow:
-        0 8px 24px rgba(0,0,0,.22);
+    box-shadow: 0 8px 24px rgba(0,0,0,.22);
     position:relative;
     overflow:hidden;
-}
-
-.card:after{
-    display:none;
-    content:"";
-    position:absolute;
-    width:85px;
-    height:85px;
-    right:-38px;
-    bottom:-42px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
 }
 
 .card-head{
@@ -331,12 +253,6 @@ body{
     justify-content:center;
     background:rgba(255,255,255,.15);
     border:1px solid rgba(255,255,255,.18);
-}
-
-.icon svg{
-    width:20px;
-    height:20px;
-    stroke:white;
 }
 
 .value{
@@ -373,49 +289,12 @@ body{
 
 /* ===== TARJETA TEMPERATURA ===== */
 
-.temperature{
-    grid-column:span 2;
-    min-height:108px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.temp-value{
-    color:white;
-    font-size:17px;
-    font-weight:800;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    gap:2px;
-}
-
-.temperature .temp-right{
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    background:rgba(255,255,255,.13);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.temperature svg{
-    width:34px;
-    height:34px;
-    stroke:white;
-}
-
-  .temp-triple{
+.temp-triple{
     grid-column:span 2;
     min-height:auto;
     position:relative;
     overflow:hidden;
     padding:14px 16px;
-}
-.temp-triple .card-head{
-    margin-bottom:2px;
 }
 
 .temp-cols{
@@ -436,10 +315,6 @@ body{
     justify-content:center;
     gap:6px;
     margin-bottom:4px;
-}
-
-.temp-icon{
-    font-size:16px;
 }
 
 .temp-label{
@@ -471,7 +346,7 @@ body{
     margin:2px 6px;
 }
 
- .temp-chart-wrap{
+.temp-chart-wrap{
     margin-top:4px;
     height:28px;
 }
@@ -498,6 +373,7 @@ body{
     color:white;
     font-weight:700;
 }
+
 /* ===== MODULOS ===== */
 
 .modules-wrap{
@@ -543,19 +419,14 @@ body{
     justify-content:center;
 }
 
-.module svg{
-    width:23px;
-    height:23px;
-    stroke:white;
-}
-
 .module-name{
     font-size:14px;
     font-weight:700;
     line-height:1.2;
     flex:1;
 }
-    .module-arrow{
+
+.module-arrow{
     width:20px;
     height:20px;
     flex:0 0 20px;
@@ -565,21 +436,20 @@ body{
 
 .temp-m{background:linear-gradient(135deg,#2486a6,#17617e)}
 .oper-m{background:linear-gradient(135deg,#df8d3e,#b75a2e)}
-.lineas-m{background:linear-gradient(135deg,#e2e8f0,#cbd5e1); border:1px solid #94a3b8;} /* Fondo claro de alto contraste */
+.lineas-m{background:linear-gradient(135deg,#e2e8f0,#cbd5e1); border:1px solid #94a3b8;}
 .stock-m{background:linear-gradient(135deg,#6f78c7,#484e94)}
 .cose-m{background:linear-gradient(135deg,#bd8052,#82543c)}
-.traz-m{background:linear-gradient(135deg,#0284c7,#0369a1); border:2px solid #38bdf8;} /* Contenedor circular resaltado */
+.traz-m{background:linear-gradient(135deg,#0284c7,#0369a1); border:2px solid #38bdf8;}
 .audit-m{background:linear-gradient(135deg,#9d72bd,#654a7b)}
 .pro-m{background:linear-gradient(135deg,#b06fa8,#744a78)}
 .map-m{background:linear-gradient(135deg,#51a87d,#327358)}
 .report-m{background:linear-gradient(135deg,#617f9f,#405b76)}
 .other-m{background:linear-gradient(135deg,#727b85,#4d555e)}
-    .icon-bio{background:linear-gradient(135deg,#46a477,#27775b);border-color:transparent;}
+
+.icon-bio{background:linear-gradient(135deg,#46a477,#27775b);border-color:transparent;}
 .icon-stock{background:linear-gradient(135deg,#6f78c7,#484e94);border-color:transparent;}
-.icon-stockacc{background:linear-gradient(135deg,#617f9f,#405b76);border-color:transparent;}
 .icon-sistemas{background:linear-gradient(135deg,#df8d3e,#b75a2e);border-color:transparent;}
 .icon-lineas{background:linear-gradient(135deg,#b06fa8,#744a78);border-color:transparent;}
-.icon-temp{background:linear-gradient(135deg,#2486a6,#17617e);border-color:transparent;}
 
 .scroll-indicator{
     text-align:right;
@@ -588,8 +458,6 @@ body{
     margin:7px 3px 0;
 }
 
-/* ===== PIE ===== */
-
 .footer{
     text-align:center;
     margin-top:18px;
@@ -597,8 +465,6 @@ body{
     opacity:.55;
 }
        
-/* ===== DESKTOP ===== */
-
 @media(min-width:700px){
     .container{
         width:680px;
@@ -607,18 +473,6 @@ body{
 
     .cards{
         grid-template-columns:repeat(3,1fr);
-    }
-
-    .temperature{
-        grid-column:span 1;
-        min-height:145px;
-        display:block;
-    }
-
-    .temperature .temp-right{
-        position:absolute;
-        right:14px;
-        bottom:14px;
     }
 
     .modules{
@@ -631,19 +485,13 @@ body{
 <body>
 
 <div class="app">
-    
     <div class="hero-bg"></div>
-    <div class="sun"></div>
-    <div class="wave"></div>
-    <div class="wave wave2"></div>
 
     <main class="container">
 
         <!-- CABECERA SIOA -->
         <header class="header">
-
             <div class="logo">
-                <!-- Concha SIOA -->
                 <img src="Conchita_sioa.webp" alt="Concha de abanico">
             </div>
 
@@ -651,7 +499,6 @@ body{
                 <h1>SISTEMA INTEGRAL DE<br>OPERACIONES ACUÍCOLAS</h1>
                 <span>SIOA</span>
             </div>
-
         </header>
 
         <!-- SALUDO -->
@@ -667,7 +514,6 @@ body{
 
             <!-- TARJETA 1 -->
             <article class="card">
-
                 <div class="card-head">
                     <div class="icon icon-bio">
                         <span style="font-size:20px;">🔬</span>
@@ -675,20 +521,18 @@ body{
                     BIOSPACT SAC
                 </div>
 
-                <div class="value" id="val-lotes">33</div>
+                <div class="value" id="val-lotes">--</div>
                 <div class="unit">Lotes</div>
 
                 <div class="secondary">
                     Chululos acumulados
-                    <strong id="val-chululos">19,500</strong>
+                    <strong id="val-chululos">--</strong>
                     <small>Chululos</small>
                 </div>
-
             </article>
 
             <!-- TARJETA 2 -->
             <article class="card">
-
                 <div class="card-head">
                     <div class="icon icon-stock">
                         <span style="font-size:20px;">📈</span>
@@ -696,20 +540,18 @@ body{
                     Stock actual
                 </div>
 
-                <div class="value" id="val-stock-actual">36,795</div>
+                <div class="value" id="val-stock-actual">--</div>
                 <div class="unit">Manojos</div>
 
                 <div class="secondary">
                     Stock acumulado
-                    <strong id="val-stock-acumulado">—</strong>
+                    <strong id="val-stock-acumulado">--</strong>
                     <small>Manojos</small>
                 </div>
-
             </article>
 
-            <!-- TARJETA 4 -->
+            <!-- TARJETA 3 -->
             <article class="card">
-
                 <div class="card-head">
                     <div class="icon icon-sistemas">
                         <span style="font-size:20px;">⚙️</span>
@@ -717,20 +559,18 @@ body{
                     Sistemas en uso
                 </div>
 
-                <div class="value" id="val-sistemas">1,853</div>
+                <div class="value" id="val-sistemas">--</div>
                 <div class="unit">Sistemas</div>
 
                 <div class="secondary">
                     Líneas ocupadas
-                    <strong id="val-lineas-ocupadas">30.53</strong>
+                    <strong id="val-lineas-ocupadas">--</strong>
                     <small>Líneas</small>
                 </div>
-
             </article>
 
-            <!-- TARJETA 5 -->
+            <!-- TARJETA 4 -->
             <article class="card">
-
                 <div class="card-head">
                     <div class="icon icon-lineas">
                         <span style="font-size:20px;">🚩</span>
@@ -738,32 +578,29 @@ body{
                     Capacidad ociosa
                 </div>
 
-                <div class="value" id="val-capacidad-ociosa">76%</div>
+                <div class="value" id="val-capacidad-ociosa">--</div>
                 <div class="unit">Cultivo</div>
 
                 <div class="secondary">
                     Líneas vacías
-                    <strong id="val-lineas-vacias">99.47</strong>
+                    <strong id="val-lineas-vacias">--</strong>
                     <small>Líneas</small>
                 </div>
-
             </article>
 
             <!-- TARJETA TEMPERATURA -->
             <article class="card temp-triple">
-
                 <div class="card-head">
                     Temperatura en cultivo
                 </div>
 
                 <div class="temp-cols">
-
                     <div class="temp-col">
                         <div class="temp-col-head">
                             <span class="temp-icon">🌊</span>
                             <span class="temp-label">Sup.</span>
                         </div>
-                       <div class="temp-value"><span id="val-temp-sup">21.4</span><span class="temp-deg">°C</span></div>
+                       <div class="temp-value"><span id="val-temp-sup">--</span><span class="temp-deg">°C</span></div>
                     </div>
 
                     <div class="temp-divider"></div>
@@ -773,7 +610,7 @@ body{
                             <span class="temp-icon">🐟</span>
                             <span class="temp-label">Med.</span>
                         </div>
-                       <div class="temp-value"><span id="val-temp-med">21.3</span><span class="temp-deg">°C</span></div>
+                       <div class="temp-value"><span id="val-temp-med">--</span><span class="temp-deg">°C</span></div>
                     </div>
 
                     <div class="temp-divider"></div>
@@ -783,9 +620,8 @@ body{
                             <span class="temp-icon">⚓</span>
                             <span class="temp-label">Fond.</span>
                         </div>
-                        <div class="temp-value"><span id="val-temp-fon">21.0</span><span class="temp-deg">°C</span></div>
+                        <div class="temp-value"><span id="val-temp-fon">--</span><span class="temp-deg">°C</span></div>
                     </div>
-
                 </div>
 
                 <div class="temp-chart-wrap">
@@ -803,16 +639,13 @@ body{
                         </defs>
                         <path id="temp-area-path" fill="url(#areaGrad)" stroke="none"/>
                         <path id="temp-line-path" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round"/>
-                        <circle id="temp-dot-sup" r="4" fill="#f4914f"/>
-                        <circle id="temp-dot-med" r="4" fill="#3e91aa"/>
-                        <circle id="temp-dot-fon" r="4" fill="#3e91aa"/>
                     </svg>
                 </div>
 
                 <div class="temp-divider-h"></div>
 
                 <div class="temp-diff">
-                    Diferencial Térmico Sup-Fon.: <strong id="val-temp-diff">0.1 °C</strong>
+                    Diferencial Térmico Sup-Fon.: <strong id="val-temp-diff">-- °C</strong>
                 </div>
             </article>
 
@@ -824,136 +657,76 @@ body{
             <div class="section-title">Módulos operativos</div>
 
             <div class="modules">
-
-                <!-- 1. TEMPERATURA -->
                 <button class="module" onclick="abrirModulo('Temperatura')">
-                    <div class="micon temp-m">
-                        <span style="font-size:22px;">🌡️</span>
-                    </div>
+                    <div class="micon temp-m"><span style="font-size:22px;">🌡️</span></div>
                     <div class="module-name">Temperatura</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 2. OPERACIONES -->
                 <button class="module" onclick="abrirModulo('Operaciones')">
-                    <div class="micon oper-m">
-                       <span style="font-size:22px;">🛠️</span>
-                    </div>
+                    <div class="micon oper-m"><span style="font-size:22px;">🛠️</span></div>
                     <div class="module-name">Operaciones</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 3. LÍNEAS -->
                 <button class="module" onclick="abrirModulo('Líneas')">
-                    <div class="micon lineas-m">
-                       <span style="font-size:22px;">🚩</span>
-                    </div>
-                   <div class="module-name">Líneas</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <div class="micon lineas-m"><span style="font-size:22px;">🚩</span></div>
+                    <div class="module-name">Líneas</div>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 4. STOCK -->
                 <button class="module" onclick="abrirModulo('Stock')">
-                    <div class="micon stock-m">
-                       <span style="font-size:22px;">📈</span>
-                    </div>
+                    <div class="micon stock-m"><span style="font-size:22px;">📈</span></div>
                     <div class="module-name">Stock</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 5. COSECHAS -->
                 <button class="module" onclick="abrirModulo('Cosecha')">
-                    <div class="micon cose-m">
-                        <span style="font-size:26px;">⛵</span>
-                    </div>
+                    <div class="micon cose-m"><span style="font-size:26px;">⛵</span></div>
                     <div class="module-name">Cosechas</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 6. TRAZABILIDAD -->
                 <button class="module" onclick="abrirModulo('Trazabilidad')">
-                    <div class="micon traz-m">
-                       <span style="font-size:22px;">🔍</span>
-                    </div>
+                    <div class="micon traz-m"><span style="font-size:22px;">🔍</span></div>
                     <div class="module-name">Trazabilidad</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 7. AUDITORÍAS -->
                 <button class="module" onclick="abrirModulo('Auditorías')">
                     <div class="micon audit-m">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="5" y="3" width="14" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/>
-                          <path d="M9 3H15V5H9V3Z" fill="white"/>
-                          <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/><path d="M9 3H15V5H9V3Z" fill="white"/><path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
                     <div class="module-name">Auditorías</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 8. PROSPECCIONES -->
                 <button class="module" onclick="abrirModulo('Prospecciones')">
-                    <div class="micon pro-m">
-                       <span style="font-size:22px;">🎯</span>
-                    </div>
+                    <div class="micon pro-m"><span style="font-size:22px;">🎯</span></div>
                     <div class="module-name">Prospecciones</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 9. UBICACIÓN DE ÁREAS -->
                 <button class="module" onclick="abrirModulo('Ubicación de Áreas')">
-                    <div class="micon map-m">
-                        <span style="font-size:22px;">🌍</span>
-                    </div>
+                    <div class="micon map-m"><span style="font-size:22px;">🌍</span></div>
                     <div class="module-name">Ubicación de Áreas</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 10. ANÁLISIS AGENTE IA -->
                 <button class="module" onclick="abrirModulo('Análisis Agente IA')">
-                    <div class="micon report-m">
-                        <span style="font-size:22px;">🤖</span>
-                    </div>
+                    <div class="micon report-m"><span style="font-size:22px;">🤖</span></div>
                     <div class="module-name">Análisis Agente IA</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <!-- 11. REPORTES IA -->
                 <button class="module" onclick="abrirModulo('Reportes IA')">
-                    <div class="micon other-m">
-                        <span style="font-size:22px;">✨</span>
-                    </div>
+                    <div class="micon other-m"><span style="font-size:22px;">✨</span></div>
                     <div class="module-name">Reportes IA</div>
-                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-
             </div>
 
             <div class="scroll-indicator">↕ Desliza para ver todos los módulos</div>
-
         </section>
 
         <footer class="footer">
@@ -964,11 +737,7 @@ body{
         <div id="modal-modulo" class="modal-overlay" style="display: none;">
           <div class="modulo-sheet">
             <h3 id="modal-titulo">Módulo</h3>
-            
-            <div id="modal-opciones" style="display: flex; flex-direction: column; gap: 12px;">
-              <!-- Las opciones se cargan dinámicamente -->
-            </div>
-            
+            <div id="modal-opciones" style="display: flex; flex-direction: column; gap: 12px;"></div>
             <button type="button" class="btn-cancelar" onclick="cerrarModuloMenu()">Cancelar</button>
           </div>
         </div>
@@ -977,29 +746,71 @@ body{
 </div>
 
 <script>
-
-/* ===== FECHA AUTOMÁTICA DEL DISPOSITIVO ===== */
-
+/* ===== FECHA AUTOMÁTICA ===== */
 function actualizarFecha(){
     const ahora = new Date();
-    const opciones = {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-        weekday: 'long'
-    };
-
+    const opciones = { day: '2-digit', month: 'long', year: 'numeric', weekday: 'long' };
     const fecha = ahora.toLocaleDateString('es-ES', opciones);
-    const fechaCapitalizada = fecha.charAt(0).toUpperCase() + fecha.slice(1);
-
-    document.getElementById('fechaActual').innerHTML =
-        '📅 Actualizado al <span class="date-highlight">' + fechaCapitalizada + '</span>';
+    document.getElementById('fechaActual').innerHTML = '📅 Actualizado al <span class="date-highlight">' + fecha.charAt(0).toUpperCase() + fecha.slice(1) + '</span>';
 }
-    
 actualizarFecha();
 
-/* ===== NAVEGACIÓN DE MÓDULOS ===== */
+/* ===== LECTURA DINÁMICA DE RESUMEN_SIOA ===== */
+function cargarDatosResumen() {
+  const urlWebApp = "https://script.google.com/macros/s/AKfycbyyA7CM0iVfd8_pidjxAXGinuT70M1acCM2uEr_f8IOC8YcyTK_JfPiVYkZgKJxTfmz/exec";
 
+  fetch(urlWebApp)
+    .then(response => response.json())
+    .then(data => {
+      // Mapeo de campos de la hoja RESUMEN_SIOA
+      if (data["Lotes BIOSPACT"] !== undefined) 
+        document.getElementById("val-lotes").innerText = data["Lotes BIOSPACT"];
+      
+      if (data["Chululos Acumulados"] !== undefined) 
+        document.getElementById("val-chululos").innerText = Number(data["Chululos Acumulados"]).toLocaleString('es-PE');
+      
+      if (data["Stock Actual"] !== undefined) 
+        document.getElementById("val-stock-actual").innerText = Number(data["Stock Actual"]).toLocaleString('es-PE');
+      
+      if (data["Stock Acumulado Total"] !== undefined) 
+        document.getElementById("val-stock-acumulado").innerText = Number(data["Stock Acumulado Total"]).toLocaleString('es-PE');
+      
+      if (data["Sistemas en Uso"] !== undefined) 
+        document.getElementById("val-sistemas").innerText = Number(data["Sistemas en Uso"]).toLocaleString('es-PE');
+      
+      if (data["Lineas Ocupadas"] !== undefined) 
+        document.getElementById("val-lineas-ocupadas").innerText = data["Lineas Ocupadas"];
+      
+      if (data["Capacidad Ociosa"] !== undefined) {
+        let cap = data["Capacidad Ociosa"];
+        let capPorcentaje = (typeof cap === "number" && cap <= 1) ? (cap * 100).toFixed(1) : cap;
+        document.getElementById("val-capacidad-ociosa").innerText = capPorcentaje + "%";
+      }
+      
+      if (data["Lineas Vacias"] !== undefined) 
+        document.getElementById("val-lineas-vacias").innerText = data["Lineas Vacias"];
+
+      if (data["Temperatura Superficie"] !== undefined)
+        document.getElementById("val-temp-sup").innerText = data["Temperatura Superficie"];
+
+      if (data["Temperatura Media"] !== undefined) {
+        document.getElementById("val-temp-med").innerText = data["Temperatura Media"];
+        document.getElementById("val-temp-fon").innerText = data["Temperatura Media"]; // Reflejo referencial
+      }
+
+      // Cálculo diferencial térmico
+      if (data["Temperatura Superficie"] !== undefined && data["Temperatura Media"] !== undefined) {
+        let diff = Math.abs(parseFloat(data["Temperatura Superficie"]) - parseFloat(data["Temperatura Media"])).toFixed(1);
+        document.getElementById("val-temp-diff").innerText = diff + " °C";
+      }
+    })
+    .catch(err => console.error("Error al cargar datos del RESUMEN_SIOA:", err));
+}
+
+// Ejecutar carga al abrir la página
+cargarDatosResumen();
+
+/* ===== NAVEGACIÓN Y MENÚS ===== */
 const modulosData = {
   'Temperatura': {
     titulo: "Temperatura en Cultivo",
