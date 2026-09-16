@@ -694,9 +694,9 @@ body{
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <button class="module" onclick="abrirModulo('Ver Informes,Reportes, otros IA')">
+                <button class="module" onclick="abrirModulo('Ver Informes, Reportes IA')">
                     <div class="micon other-m"><span style="font-size:22px;">✨</span></div>
-                    <div class="module-name">Ver Informes,Reportes, otros IA</div>
+                    <div class="module-name">Ver Informes, Reportes IA</div>
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
             </div>
@@ -878,8 +878,8 @@ const modulosData = {
       { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
     ]
   },
-  'Ver Informes,Reportes, otros IA': {
-    titulo: "Ver Informes,Reportes, otros IA",
+  'Ver Informes, Reportes IA': {
+    titulo: "Ver Informes, Reportes IA",
     opciones: [
       { texto: "Generar Reporte IA", icono: "✨", url: "#" }
     ]
@@ -935,7 +935,7 @@ function abrirPantallaAgente() {
         ⏳ El Agente SIOA está analizando los datos y redactando el informe...
       </div>
 
-      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.4;">
+      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.5;">
       </div>
     </div>
   `;
@@ -971,7 +971,17 @@ function procesarConsultaAgente() {
       btn.style.opacity = '1';
       cargando.style.display = 'none';
       respuestaDiv.style.display = 'block';
-      respuestaDiv.textContent = text;
+
+      try {
+        const data = JSON.parse(text);
+        if (data.respuesta) {
+          respuestaDiv.innerHTML = data.respuesta.replace(/\\n/g, '\n');
+        } else {
+          respuestaDiv.textContent = text;
+        }
+      } catch (e) {
+        respuestaDiv.textContent = text;
+      }
     })
     .catch(err => {
       btn.disabled = false;
