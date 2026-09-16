@@ -755,7 +755,6 @@ function dibujaGraficaTemperatura(sup, med, fon) {
 function cargarDatosResumen(reintento = true) {
   const urlWebApp = "https://script.google.com/macros/s/AKfycbyyA7CM0iVfd8_pidjxAXGinuT70M1acCM2uEr_f8IOC8YcyTK_JfPiVYkZgKJxTfmz/exec";
 
-  // Mostrar datos almacenados previamente para evitar ceros si hay demora
   const cachedData = localStorage.getItem("sioa_resumen_cache");
   if (cachedData) {
     try {
@@ -821,6 +820,7 @@ function renderizarResumen(data) {
 
   dibujaGraficaTemperatura(tSup, tMed, tFon);
 }
+
 cargarDatosResumen();
 
 const modulosData = {
@@ -862,6 +862,7 @@ const modulosData = {
   'Auditorías': {
     titulo: "Módulo de Auditorías",
     opciones: [
+      { texto: "BD Auditorías", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/1sKDRWEuBBfoorwfhdyedkPecFBvkN62_UF6fJiMB13Y/edit?gid=258700677#gid=258700677" },
       { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/0301ef02-0739-4fa0-ab9e-b7d833b9df48/ReportSection?experience=power-bi" }
     ]
   },
@@ -901,7 +902,7 @@ const modulosData = {
   'Ver Informes, Reportes IA': {
     titulo: "Ver Informes, Reportes IA",
     opciones: [
-      { texto: "Generar Reporte IA", icono: "✨", url: "#" }
+      { texto: "Abrir Carpeta INFORMES IA (Drive)", icono: "📁", url: "https://drive.google.com/drive/folders/1EraCw3nsBexrYPvzvoVrcx68Rrun1IJk" }
     ]
   }
 };
@@ -943,22 +944,85 @@ function abrirPantallaAgente() {
 
   contenedor.innerHTML = `
     <div style="padding: 10px; font-family: sans-serif;">
-      <p style="color: #cbd5e1; font-size: 13px; margin-top:0; font-weight: bold;">Ingresa tu Consulta</p>
+      <p style="color: #cbd5e1; font-size: 13px; margin-top:0; font-weight: bold;">Ingresa tu Consulta o Dicta por Voz</p>
       
-      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un Informe , Reporte , otros"></textarea>
+      <div style="position: relative; display: flex; gap: 8px; align-items: flex-start;">
+        <textarea id="promptAgenteInput" rows="4" style="flex: 1; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe técnico de stock..."></textarea>
+        
+        <button id="btnMicrofono" onclick="alternarDictadoVoz()" type="button" style="background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; height: 48px; width: 48px;" title="Dictar por voz">
+          🎙️
+        </button>
+      </div>
       
       <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
         🔍 Consultar Agente IA
       </button>
 
       <div id="cargandoAgente" style="display:none; text-align:center; color:#38bdf8; font-weight:bold; margin-top:15px; font-size:13px;">
-        ⏳ El Agente SIOA está analizando los datos y redactando el informe...
+        ⏳ El Agente SIOA está analizando los datos y redactando...
       </div>
 
-      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:250px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.5;">
+      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:280px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.5;">
       </div>
     </div>
   `;
+}
+
+let reconocedorVoz = null;
+let escuchando = false;
+
+function alternarDictadoVoz() {
+  const btnMic = document.getElementById('btnMicrofono');
+  const inputPrompt = document.getElementById('promptAgenteInput');
+
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    alert("Tu navegador o dispositivo no soporta el dictado por voz directo. Puedes usar el teclado del celular.");
+    return;
+  }
+
+  if (escuchando) {
+    reconocedorVoz.stop();
+    escuchando = false;
+    btnMic.style.background = "#10b981";
+    btnMic.innerHTML = "🎙️";
+    return;
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  reconocedorVoz = new SpeechRecognition();
+  reconocedorVoz.lang = 'es-PE';
+  reconocedorVoz.continuous = false;
+  reconocedorVoz.interimResults = false;
+
+  reconocedorVoz.onstart = function() {
+    escuchando = true;
+    btnMic.style.background = "#ef4444";
+    btnMic.innerHTML = "🛑";
+  };
+
+  reconocedorVoz.onresult = function(event) {
+    const textoDictado = event.results[0][0].transcript;
+    if (inputPrompt.value.trim() !== "") {
+      inputPrompt.value += " " + textoDictado;
+    } else {
+      inputPrompt.value = textoDictado;
+    }
+  };
+
+  reconocedorVoz.onerror = function(event) {
+    console.error("Error de voz:", event.error);
+    escuchando = false;
+    btnMic.style.background = "#10b981";
+    btnMic.innerHTML = "🎙️";
+  };
+
+  reconocedorVoz.onend = function() {
+    escuchando = false;
+    btnMic.style.background = "#10b981";
+    btnMic.innerHTML = "🎙️";
+  };
+
+  reconocedorVoz.start();
 }
 
 function procesarConsultaAgente() {
