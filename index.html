@@ -501,12 +501,12 @@ body{
                     BIOSPACT SAC
                 </div>
 
-                <div class="value" id="val-lotes">--</div>
+                <div class="value" id="val-lotes">0</div>
                 <div class="unit">Lotes</div>
 
                 <div class="secondary">
                     Chululos acumulados
-                    <strong id="val-chululos">--</strong>
+                    <strong id="val-chululos">0</strong>
                     <small>Chululos</small>
                 </div>
             </article>
@@ -519,12 +519,12 @@ body{
                     Stock actual
                 </div>
 
-                <div class="value" id="val-stock-actual">--</div>
+                <div class="value" id="val-stock-actual">0</div>
                 <div class="unit">Manojos</div>
 
                 <div class="secondary">
                     Stock acumulado
-                    <strong id="val-stock-acumulado">--</strong>
+                    <strong id="val-stock-acumulado">0</strong>
                     <small>Manojos</small>
                 </div>
             </article>
@@ -537,12 +537,12 @@ body{
                     Sistemas en uso
                 </div>
 
-                <div class="value" id="val-sistemas">--</div>
+                <div class="value" id="val-sistemas">0</div>
                 <div class="unit">Sistemas</div>
 
                 <div class="secondary">
                     Líneas ocupadas
-                    <strong id="val-lineas-ocupadas">--</strong>
+                    <strong id="val-lineas-ocupadas">0</strong>
                     <small>Líneas</small>
                 </div>
             </article>
@@ -555,12 +555,12 @@ body{
                     Capacidad ociosa
                 </div>
 
-                <div class="value" id="val-capacidad-ociosa">--</div>
+                <div class="value" id="val-capacidad-ociosa">0%</div>
                 <div class="unit">Cultivo</div>
 
                 <div class="secondary">
                     Líneas vacías
-                    <strong id="val-lineas-vacias">--</strong>
+                    <strong id="val-lineas-vacias">0</strong>
                     <small>Líneas</small>
                 </div>
             </article>
@@ -576,7 +576,7 @@ body{
                             <span class="temp-icon">🌊</span>
                             <span class="temp-label">Sup.</span>
                         </div>
-                       <div class="temp-value"><span id="val-temp-sup">--</span><span class="temp-deg">°C</span></div>
+                       <div class="temp-value"><span id="val-temp-sup">0.0</span><span class="temp-deg">°C</span></div>
                     </div>
 
                     <div class="temp-divider"></div>
@@ -586,7 +586,7 @@ body{
                             <span class="temp-icon">🐟</span>
                             <span class="temp-label">Med.</span>
                         </div>
-                       <div class="temp-value"><span id="val-temp-med">--</span><span class="temp-deg">°C</span></div>
+                       <div class="temp-value"><span id="val-temp-med">0.0</span><span class="temp-deg">°C</span></div>
                     </div>
 
                     <div class="temp-divider"></div>
@@ -596,7 +596,7 @@ body{
                             <span class="temp-icon">⚓</span>
                             <span class="temp-label">Fond.</span>
                         </div>
-                        <div class="temp-value"><span id="val-temp-fon">--</span><span class="temp-deg">°C</span></div>
+                        <div class="temp-value"><span id="val-temp-fon">0.0</span><span class="temp-deg">°C</span></div>
                     </div>
                 </div>
 
@@ -621,7 +621,7 @@ body{
                 <div class="temp-divider-h"></div>
 
                 <div class="temp-diff">
-                    Diferencial Térmico Sup-Fon.: <strong id="val-temp-diff">-- °C</strong>
+                    Diferencial Térmico Sup-Fon.: <strong id="val-temp-diff">0.0 °C</strong>
                 </div>
             </article>
 
@@ -688,15 +688,15 @@ body{
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <button class="module" onclick="abrirModulo('Análisis Agente IA')">
+                <button class="module" onclick="abrirModulo('Agente IA')">
                     <div class="micon report-m"><span style="font-size:22px;">🤖</span></div>
-                    <div class="module-name">Análisis Agente IA</div>
+                    <div class="module-name">Agente IA</div>
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <button class="module" onclick="abrirModulo('Reportes IA')">
+                <button class="module" onclick="abrirModulo('Ver Informes,Reportes, otros IA')">
                     <div class="micon other-m"><span style="font-size:22px;">✨</span></div>
-                    <div class="module-name">Reportes IA</div>
+                    <div class="module-name">Ver Informes,Reportes, otros IA</div>
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
             </div>
@@ -732,7 +732,6 @@ function dibujaGraficaTemperatura(sup, med, fon) {
   const svg = document.getElementById('temp-chart-svg');
   if (!svg) return;
 
-  // Renderizado dinámico de la curva térmica y área inferior
   svg.innerHTML = `
     <defs>
       <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -759,28 +758,24 @@ function cargarDatosResumen() {
   fetch(urlWebApp)
     .then(response => response.json())
     .then(data => {
-      // 1. BIOSPACT SAC
       if (data["Lotes BIOSPACT"] !== undefined) 
         document.getElementById("val-lotes").innerText = data["Lotes BIOSPACT"];
       
       if (data["Chululos Acumulados"] !== undefined) 
         document.getElementById("val-chululos").innerText = Math.round(Number(data["Chululos Acumulados"])).toLocaleString('es-PE');
       
-      // 2. STOCK ACTUAL (Valores obligatorios como enteros)
       if (data["Stock Actual"] !== undefined) 
         document.getElementById("val-stock-actual").innerText = Math.round(Number(data["Stock Actual"])).toLocaleString('es-PE');
       
       if (data["Stock Acumulado Total"] !== undefined) 
         document.getElementById("val-stock-acumulado").innerText = Math.round(Number(data["Stock Acumulado Total"])).toLocaleString('es-PE');
       
-      // 3. SISTEMAS EN USO
       if (data["Sistemas en Uso"] !== undefined) 
         document.getElementById("val-sistemas").innerText = Math.round(Number(data["Sistemas en Uso"])).toLocaleString('es-PE');
       
       if (data["Lineas Ocupadas"] !== undefined) 
         document.getElementById("val-lineas-ocupadas").innerText = data["Lineas Ocupadas"];
       
-      // 4. CAPACIDAD OCIOSA
       if (data["Capacidad Ociosa"] !== undefined) {
         let cap = data["Capacidad Ociosa"];
         let capPorcentaje = (typeof cap === "number" && cap <= 1) ? (cap * 100).toFixed(1) : parseFloat(cap).toFixed(1);
@@ -790,7 +785,6 @@ function cargarDatosResumen() {
       if (data["Lineas Vacias"] !== undefined) 
         document.getElementById("val-lineas-vacias").innerText = data["Lineas Vacias"];
 
-      // 5. TEMPERATURAS Y GRÁFICA
       let tSup = data["Temperatura Superficie"] !== undefined ? parseFloat(data["Temperatura Superficie"]) : 21.6;
       let tMed = data["Temperatura Media"] !== undefined ? parseFloat(data["Temperatura Media"]) : 21.5;
       let tFon = data["Temperatura Fondo"] !== undefined ? parseFloat(data["Temperatura Fondo"]) : tMed;
@@ -802,13 +796,11 @@ function cargarDatosResumen() {
       let diff = Math.abs(tSup - tFon).toFixed(1);
       document.getElementById("val-temp-diff").innerText = diff + " °C";
 
-      // Renderizar gráfica
       dibujaGraficaTemperatura(tSup, tMed, tFon);
     })
     .catch(err => console.error("Error al cargar datos del RESUMEN_SIOA:", err));
 }
 
-// Carga inicial
 cargarDatosResumen();
 
 const modulosData = {
@@ -816,6 +808,7 @@ const modulosData = {
     titulo: "Temperatura en Cultivo",
     opciones: [
       { texto: "Formulario de registro", icono: "📝", url: "https://tally.so/r/eqz75k" },
+      { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/12VEtbGZDvEHsdHTkY_F9VLY2-4FsIbUWytS45bQwi-k/edit?gid=1914183894#gid=1914183894" },
       { texto: "Ver dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/9de0b4f7-f1eb-4edb-9384-fb3146d50ac3/ReportSectionc5bca5620a719b11cf3b?experience=power-bi" }
     ]
   },
@@ -825,6 +818,7 @@ const modulosData = {
       { texto: "Registro, Ingreso de Semilla", icono: "📝", url: "https://tally.so/r/yPGxAx" },
       { texto: "Registro, Desdoble de Semilla", icono: "📝", url: "https://tally.so/r/gDpLP4" },
       { texto: "Registro, Siembra en Fondo", icono: "📝", url: "https://tally.so/r/gDpLM4" },
+      { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/1-19s21noTtx4RpMYO4-aSQvNBWrhFWnqc2vTDGh-ik0/edit?gid=583312938#gid=583312938" },
       { texto: "Ver dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/e341089f-c714-4bdc-8afb-b58fda147418/4f9f6c495b166c84a684?experience=power-bi" }
     ]
   },
@@ -833,6 +827,7 @@ const modulosData = {
     opciones: [
       { texto: "Registro de Desdoble", icono: "📝", url: "https://tally.so/r/2EWEKA" },
       { texto: "Registro de Siembra", icono: "📝", url: "https://tally.so/r/dWMWKK" },
+      { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/1BXzb32XSl1vW8KM-gdXvljjZeY37XpIitqvyiN7InIQ/edit?gid=827542645#gid=827542645" },
       { texto: "Ver Dashboard de Líneas", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/c2322029-7ed9-4fa6-88a6-302d3ba644ee/2fb791bb6c19f3437b6a?experience=power-bi" }
     ]
   },
@@ -853,13 +848,14 @@ const modulosData = {
   'Cosecha': {
     titulo: "Módulo de Cosecha / Extracción",
     opciones: [
-      { texto: "Ver Cosecha", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
+      { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/18TJBmgBYirHINtUZduqZFdff_4hOMVspLu2Xa61LsZ8/edit?gid=778118622#gid=778118622" },
+      { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/51484d34-9626-417b-ae85-a319dbbcda1b/ReportSection?experience=power-bi" }
     ]
   },
   'Trazabilidad': {
     titulo: "Módulo de Trazabilidad",
     opciones: [
-      { texto: "Registro Google Sheets", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/12YWJU_0IAISVHZ1Uc-q9EwgJH_n2l4Gyape1IS0lxMo/edit?gid=825055531#gid=825055531" },
+      { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/12YWJU_0IAISVHZ1Uc-q9EwgJH_n2l4Gyape1IS0lxMo/edit?gid=825055531#gid=825055531" },
       { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/d1711f85-698f-4ade-8945-c5492155b7ff/ReportSection?experience=power-bi" }
     ]
   },
@@ -876,14 +872,14 @@ const modulosData = {
       { texto: "Ver Mapa / Ubicación", icono: "🌍", url: "#" }
     ]
   },
-  'Análisis Agente IA': {
-    titulo: "Análisis Agente IA",
+  'Agente IA': {
+    titulo: "Agente IA",
     opciones: [
       { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
     ]
   },
-  'Reportes IA': {
-    titulo: "Reportes IA",
+  'Ver Informes,Reportes, otros IA': {
+    titulo: "Ver Informes,Reportes, otros IA",
     opciones: [
       { texto: "Generar Reporte IA", icono: "✨", url: "#" }
     ]
@@ -927,9 +923,9 @@ function abrirPantallaAgente() {
 
   contenedor.innerHTML = `
     <div style="padding: 10px; font-family: sans-serif;">
-      <p style="color: #cbd5e1; font-size: 13px; margin-top:0;">Ingresa tu consulta sobre trazabilidad, lotes o solicita un informe situacional:</p>
+      <p style="color: #cbd5e1; font-size: 13px; margin-top:0; font-weight: bold;">Ingresa tu Consulta</p>
       
-      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe situacional sobre la trazabilidad de ingresos DER del mes..."></textarea>
+      <textarea id="promptAgenteInput" rows="4" style="width:100%; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un Informe , Reporte , otros"></textarea>
       
       <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
         🔍 Consultar Agente IA
@@ -961,41 +957,30 @@ function procesarConsultaAgente() {
   cargando.style.display = 'block';
   respuestaDiv.style.display = 'none';
 
-const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+  const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
 
-         const params = new URLSearchParams({
-            accion: "consultar",
-            prompt: prompt
-        });
+  const params = new URLSearchParams({
+      accion: "consultar",
+      prompt: prompt
+  });
 
-      fetch(`${webAppUrl}?${params.toString()}`)    .then(res => res.text())
-        .then(text => {
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            cargando.style.display = 'none';
-            respuestaDiv.style.display = 'block';
-
-            try {
-                const data = JSON.parse(text);
-                if (data.respuesta) {
-                    respuestaDiv.innerText = data.respuesta;
-                } else if (data.estado) {
-                    respuestaDiv.innerText = data.estado;
-                } else {
-                    respuestaDiv.innerText = JSON.stringify(data, null, 2);
-                }
-            } catch (e) {
-                respuestaDiv.innerText = text;
-            }
-        })
-        .catch(err => {
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            cargando.style.display = 'none';
-            alert("Error al conectar con el Agente SIOA: " + err.message);
-        });
-        
-      }
+  fetch(`${webAppUrl}?${params.toString()}`)
+    .then(res => res.text())
+    .then(text => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      respuestaDiv.style.display = 'block';
+      respuestaDiv.textContent = text;
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      cargando.style.display = 'none';
+      respuestaDiv.style.display = 'block';
+      respuestaDiv.textContent = "Error al conectar con el servidor: " + err;
+    });
+}
 </script>
 
 </body>
