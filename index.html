@@ -752,55 +752,75 @@ function dibujaGraficaTemperatura(sup, med, fon) {
   `;
 }
 
-function cargarDatosResumen() {
+function cargarDatosResumen(reintento = true) {
   const urlWebApp = "https://script.google.com/macros/s/AKfycbyyA7CM0iVfd8_pidjxAXGinuT70M1acCM2uEr_f8IOC8YcyTK_JfPiVYkZgKJxTfmz/exec";
 
+  // Mostrar datos almacenados previamente para evitar ceros si hay demora
+  const cachedData = localStorage.getItem("sioa_resumen_cache");
+  if (cachedData) {
+    try {
+      renderizarResumen(JSON.parse(cachedData));
+    } catch(e) {}
+  }
+
   fetch(urlWebApp)
-    .then(response => response.json())
-    .then(data => {
-      if (data["Lotes BIOSPACT"] !== undefined) 
-        document.getElementById("val-lotes").innerText = data["Lotes BIOSPACT"];
-      
-      if (data["Chululos Acumulados"] !== undefined) 
-        document.getElementById("val-chululos").innerText = Math.round(Number(data["Chululos Acumulados"])).toLocaleString('es-PE');
-      
-      if (data["Stock Actual"] !== undefined) 
-        document.getElementById("val-stock-actual").innerText = Math.round(Number(data["Stock Actual"])).toLocaleString('es-PE');
-      
-      if (data["Stock Acumulado Total"] !== undefined) 
-        document.getElementById("val-stock-acumulado").innerText = Math.round(Number(data["Stock Acumulado Total"])).toLocaleString('es-PE');
-      
-      if (data["Sistemas en Uso"] !== undefined) 
-        document.getElementById("val-sistemas").innerText = Math.round(Number(data["Sistemas en Uso"])).toLocaleString('es-PE');
-      
-      if (data["Lineas Ocupadas"] !== undefined) 
-        document.getElementById("val-lineas-ocupadas").innerText = data["Lineas Ocupadas"];
-      
-      if (data["Capacidad Ociosa"] !== undefined) {
-        let cap = data["Capacidad Ociosa"];
-        let capPorcentaje = (typeof cap === "number" && cap <= 1) ? (cap * 100).toFixed(1) : parseFloat(cap).toFixed(1);
-        document.getElementById("val-capacidad-ociosa").innerText = capPorcentaje + "%";
-      }
-      
-      if (data["Lineas Vacias"] !== undefined) 
-        document.getElementById("val-lineas-vacias").innerText = data["Lineas Vacias"];
-
-      let tSup = data["Temperatura Superficie"] !== undefined ? parseFloat(data["Temperatura Superficie"]) : 21.6;
-      let tMed = data["Temperatura Media"] !== undefined ? parseFloat(data["Temperatura Media"]) : 21.5;
-      let tFon = data["Temperatura Fondo"] !== undefined ? parseFloat(data["Temperatura Fondo"]) : tMed;
-
-      document.getElementById("val-temp-sup").innerText = tSup.toFixed(1);
-      document.getElementById("val-temp-med").innerText = tMed.toFixed(1);
-      document.getElementById("val-temp-fon").innerText = tFon.toFixed(1);
-
-      let diff = Math.abs(tSup - tFon).toFixed(1);
-      document.getElementById("val-temp-diff").innerText = diff + " °C";
-
-      dibujaGraficaTemperatura(tSup, tMed, tFon);
+    .then(response => {
+      if (!response.ok) throw new Error("Error en la respuesta del servidor");
+      return response.json();
     })
-    .catch(err => console.error("Error al cargar datos del RESUMEN_SIOA:", err));
+    .then(data => {
+      localStorage.setItem("sioa_resumen_cache", JSON.stringify(data));
+      renderizarResumen(data);
+    })
+    .catch(err => {
+      console.error("Error al cargar datos del RESUMEN_SIOA:", err);
+      if (reintento) {
+        setTimeout(() => cargarDatosResumen(false), 3000);
+      }
+    });
 }
 
+function renderizarResumen(data) {
+  if (data["Lotes BIOSPACT"] !== undefined) 
+    document.getElementById("val-lotes").innerText = data["Lotes BIOSPACT"];
+  
+  if (data["Chululos Acumulados"] !== undefined) 
+    document.getElementById("val-chululos").innerText = Math.round(Number(data["Chululos Acumulados"])).toLocaleString('es-PE');
+  
+  if (data["Stock Actual"] !== undefined) 
+    document.getElementById("val-stock-actual").innerText = Math.round(Number(data["Stock Actual"])).toLocaleString('es-PE');
+  
+  if (data["Stock Acumulado Total"] !== undefined) 
+    document.getElementById("val-stock-acumulado").innerText = Math.round(Number(data["Stock Acumulado Total"])).toLocaleString('es-PE');
+  
+  if (data["Sistemas en Uso"] !== undefined) 
+    document.getElementById("val-sistemas").innerText = Math.round(Number(data["Sistemas en Uso"])).toLocaleString('es-PE');
+  
+  if (data["Lineas Ocupadas"] !== undefined) 
+    document.getElementById("val-lineas-ocupadas").innerText = data["Lineas Ocupadas"];
+  
+  if (data["Capacidad Ociosa"] !== undefined) {
+    let cap = data["Capacidad Ociosa"];
+    let capPorcentaje = (typeof cap === "number" && cap <= 1) ? (cap * 100).toFixed(1) : parseFloat(cap).toFixed(1);
+    document.getElementById("val-capacidad-ociosa").innerText = capPorcentaje + "%";
+  }
+  
+  if (data["Lineas Vacias"] !== undefined) 
+    document.getElementById("val-lineas-vacias").innerText = data["Lineas Vacias"];
+
+  let tSup = data["Temperatura Superficie"] !== undefined ? parseFloat(data["Temperatura Superficie"]) : 21.6;
+  let tMed = data["Temperatura Media"] !== undefined ? parseFloat(data["Temperatura Media"]) : 21.5;
+  let tFon = data["Temperatura Fondo"] !== undefined ? parseFloat(data["Temperatura Fondo"]) : tMed;
+
+  document.getElementById("val-temp-sup").innerText = tSup.toFixed(1);
+  document.getElementById("val-temp-med").innerText = tMed.toFixed(1);
+  document.getElementById("val-temp-fon").innerText = tFon.toFixed(1);
+
+  let diff = Math.abs(tSup - tFon).toFixed(1);
+  document.getElementById("val-temp-diff").innerText = diff + " °C";
+
+  dibujaGraficaTemperatura(tSup, tMed, tFon);
+}
 cargarDatosResumen();
 
 const modulosData = {
