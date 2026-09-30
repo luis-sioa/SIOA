@@ -795,8 +795,10 @@ function renderizarResumen(data) {
   if (data["Sistemas en Uso"] !== undefined) 
     document.getElementById("val-sistemas").innerText = Math.round(Number(data["Sistemas en Uso"])).toLocaleString('es-PE');
   
-  if (data["Lineas Ocupadas"] !== undefined) 
-    document.getElementById("val-lineas-ocupadas").innerText = data["Lineas Ocupadas"];
+ if (data["Lineas Ocupadas"] !== undefined) {
+    let lOcup = Number(data["Lineas Ocupadas"]);
+    document.getElementById("val-lineas-ocupadas").innerText = isNaN(lOcup) ? data["Lineas Ocupadas"] : parseFloat(lOcup.toFixed(2));
+  }
   
   if (data["Capacidad Ociosa"] !== undefined) {
     let cap = data["Capacidad Ociosa"];
@@ -920,9 +922,18 @@ function abrirModulo(modulo) {
       const a = document.createElement('a');
       a.className = 'modulo-opcion';
       a.href = opcion.url;
+      
       if (opcion.url.startsWith('http')) {
         a.target = '_blank';
+        a.rel = 'noopener noreferrer';
       }
+      
+      a.onclick = function() {
+        if (opcion.url.startsWith('http')) {
+          setTimeout(cerrarModuloMenu, 300);
+        }
+      };
+
       a.innerHTML = `<span>${opcion.icono}</span> <span>${opcion.texto}</span>`;
       contenedor.appendChild(a);
     });
