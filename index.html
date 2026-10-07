@@ -688,9 +688,9 @@ body{
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
-                <button class="module" onclick="abrirModulo('Agente IA')">
+                <button class="module" onclick="abrirModulo('Agentes IA')">
                     <div class="micon report-m"><span style="font-size:22px;">🤖</span></div>
-                    <div class="module-name">Agente IA</div>
+                    <div class="module-name">Agentes IA</div>
                     <svg class="module-arrow" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
 
@@ -872,7 +872,7 @@ const modulosData = {
     titulo: "Módulo de Cosecha / Extracción",
     opciones: [
       { texto: "BD", icono: "🟢", url: "https://docs.google.com/spreadsheets/d/18TJBmgBYirHINtUZduqZFdff_4hOMVspLu2Xa61LsZ8/edit?gid=778118622#gid=778118622" },
-     { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/573ef22b-ad3b-48d5-bfe4-32c38dec098f/094d148b6b1877994ec0?experience=power-bi" }
+      { texto: "Ver Dashboard", icono: "📊", url: "https://app.powerbi.com/groups/me/reports/573ef22b-ad3b-48d5-bfe4-32c38dec098f/094d148b6b1877994ec0?experience=power-bi" }
     ]   
   },
   'Trazabilidad': {
@@ -895,7 +895,7 @@ const modulosData = {
       { texto: "Ver Mapa / Ubicación", icono: "🌍", url: "#" }
     ]
   },
-'Agentes IA': {
+  'Agentes IA': {
     titulo: "Agentes IA",
     opciones: [
       { texto: "Consultar Agentes IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
@@ -1033,10 +1033,12 @@ function alternarDictadoVoz() {
   }
 
   if (escuchando) {
-    reconocedorVoz.stop();
+    if (reconocedorVoz) reconocedorVoz.stop();
     escuchando = false;
-    btnMic.style.background = "#10b981";
-    btnMic.innerHTML = "🎙️";
+    if (btnMic) {
+      btnMic.style.background = "#10b981";
+      btnMic.innerHTML = "🎙️";
+    }
     return;
   }
 
@@ -1048,30 +1050,33 @@ function alternarDictadoVoz() {
 
   reconocedorVoz.onstart = function() {
     escuchando = true;
-    btnMic.style.background = "#ef4444";
-    btnMic.innerHTML = "🛑";
+    if (btnMic) {
+      btnMic.style.background = "#ef4444";
+      btnMic.innerHTML = "🛑";
+    }
   };
 
   reconocedorVoz.onresult = function(event) {
     const textoDictado = event.results[0][0].transcript;
-    if (inputPrompt.value.trim() !== "") {
-      inputPrompt.value += " " + textoDictado;
-    } else {
-      inputPrompt.value = textoDictado;
+    if (inputPrompt) {
+      inputPrompt.value = inputPrompt.value ? inputPrompt.value + " " + textoDictado : textoDictado;
     }
   };
 
-  reconocedorVoz.onerror = function(event) {
-    console.error("Error de voz:", event.error);
+  reconocedorVoz.onerror = function() {
     escuchando = false;
-    btnMic.style.background = "#10b981";
-    btnMic.innerHTML = "🎙️";
+    if (btnMic) {
+      btnMic.style.background = "#10b981";
+      btnMic.innerHTML = "🎙️";
+    }
   };
 
   reconocedorVoz.onend = function() {
     escuchando = false;
-    btnMic.style.background = "#10b981";
-    btnMic.innerHTML = "🎙️";
+    if (btnMic) {
+      btnMic.style.background = "#10b981";
+      btnMic.innerHTML = "🎙️";
+    }
   };
 
   reconocedorVoz.start();
