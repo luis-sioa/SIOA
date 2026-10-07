@@ -895,8 +895,8 @@ const modulosData = {
       { texto: "Ver Mapa / Ubicación", icono: "🌍", url: "#" }
     ]
   },
-  'Agente IA': {
-    titulo: "Agente IA",
+ 'Agentes IA': {
+    titulo: "Agentes IA",
     opciones: [
       { texto: "Consultar Agente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
     ]
@@ -949,34 +949,75 @@ function cerrarModuloMenu() {
   }
 }
 
+var agenteSeleccionadoActivo = "AGENTE_SIOA";
+
 function abrirPantallaAgente() {
   const contenedor = document.getElementById('modal-opciones');
   if (!contenedor) return;
 
   contenedor.innerHTML = `
-    <div style="padding: 10px; font-family: sans-serif;">
-      <p style="color: #cbd5e1; font-size: 13px; margin-top:0; font-weight: bold;">Ingresa tu Consulta o Dicta por Voz</p>
+    <div style="padding: 10px; font-family: sans-serif; color: white;">
+      <h3 style="text-align: center; margin-bottom: 12px; color: #fff;">🤖 Agentes IA</h3>
       
+      <!-- Pestañas para seleccionar Agente SIOA vs Agente General -->
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <button id="btnTabSIOA" type="button" onclick="cambiarTipoAgente('AGENTE_SIOA')" 
+                style="flex: 1; padding: 8px; border-radius: 6px; border: none; background: #0d6efd; color: white; font-weight: bold; cursor: pointer; font-size: 12px;">
+          🏢 Agente SIOA (Corporativo)
+        </button>
+        <button id="btnTabGeneral" type="button" onclick="cambiarTipoAgente('AGENTE_GENERAL')" 
+                style="flex: 1; padding: 8px; border-radius: 6px; border: none; background: #343a40; color: #adb5bd; font-weight: bold; cursor: pointer; font-size: 12px;">
+          🌐 Agente IA (General)
+        </button>
+      </div>
+
+      <p id="lblDescripcionAgente" style="color: #cbd5e1; font-size: 11px; margin-top:0; margin-bottom:10px; text-align:center;">
+        Consultando datos operativos de SIOA (Hojas de Cálculo).
+      </p>
+
       <div style="position: relative; display: flex; gap: 8px; align-items: flex-start;">
-        <textarea id="promptAgenteInput" rows="4" style="flex: 1; border:1px solid #334155; background:#1e293b; color:white; border-radius:8px; padding:10px; font-size:14px; box-sizing:border-box;" placeholder="Ej: Genera un informe técnico de stock..."></textarea>
-        
-        <button id="btnMicrofono" onclick="alternarDictadoVoz()" type="button" style="background:#10b981; color:white; border:none; padding:12px; border-radius:8px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; height: 48px; width: 48px;" title="Dictar por voz">
+        <textarea id="promptAgenteInput" rows="4" placeholder="Ingresa tu consulta o dicta por voz..." 
+                  style="flex: 1; border:1px solid #334155; background:#1e293b; color:white; padding:8px; border-radius:6px; font-size:13px;"></textarea>
+
+        <button id="btnMicrofono" onclick="alternarDictadoVoz()" type="button" 
+                style="background:#10b981; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">
           🎙️
         </button>
       </div>
-      
-      <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" style="background:#0d6efd; color:white; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer;">
-        🔍 Consultar Agente IA
+
+      <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" type="button" 
+              style="background:#0d6efd; color:white; border:none; width:100%; padding:10px; margin-top:10px; border-radius:6px; font-weight:bold; cursor:pointer;">
+        🔍 Consultar Agente SIOA
       </button>
 
-      <div id="cargandoAgente" style="display:none; text-align:center; color:#38bdf8; font-weight:bold; margin-top:15px; font-size:13px;">
-        ⏳ El Agente SIOA está analizando los datos y redactando...
+      <div id="cargandoAgente" style="display:none; text-align:center; margin-top:10px; font-size:12px; color:#38bdf8;">
+        ⏳ Procesando consulta...
       </div>
 
-      <div id="respuestaAgenteDiv" style="display:none; margin-top:15px; background:#1e293b; color:#f8fafc; padding:12px; border-radius:8px; border:1px solid #334155; max-height:280px; overflow-y:auto; font-size:13px; white-space:pre-wrap; line-height:1.5;">
+      <div id="respuestaAgenteDiv" style="margin-top:12px; padding:10px; background:#0f172a; border-radius:6px; border:1px solid #334155; min-height:50px; font-size:12px; white-space:pre-wrap; color:#e2e8f0; display:none;">
       </div>
     </div>
   `;
+}
+
+function cambiarTipoAgente(tipo) {
+  agenteSeleccionadoActivo = tipo;
+  const btnSIOA = document.getElementById('btnTabSIOA');
+  const btnGeneral = document.getElementById('btnTabGeneral');
+  const lblDesc = document.getElementById('lblDescripcionAgente');
+  const btnEnviar = document.getElementById('btnEnviarConsulta');
+
+  if (tipo === "AGENTE_SIOA") {
+    if (btnSIOA) { btnSIOA.style.background = "#0d6efd"; btnSIOA.style.color = "white"; }
+    if (btnGeneral) { btnGeneral.style.background = "#343a40"; btnGeneral.style.color = "#adb5bd"; }
+    if (lblDesc) lblDesc.innerText = "Consultando datos operativos de SIOA (Hojas de Cálculo).";
+    if (btnEnviar) btnEnviar.innerText = "🔍 Consultar Agente SIOA";
+  } else {
+    if (btnGeneral) { btnGeneral.style.background = "#0d6efd"; btnGeneral.style.color = "white"; }
+    if (btnSIOA) { btnSIOA.style.background = "#343a40"; btnSIOA.style.color = "#adb5bd"; }
+    if (lblDesc) lblDesc.innerText = "Consultando conceptos técnicos generales y bibliografía acuícola.";
+    if (btnEnviar) btnEnviar.innerText = "🔍 Consultar Agente General";
+  }
 }
 
 let reconocedorVoz = null;
@@ -1037,54 +1078,58 @@ function alternarDictadoVoz() {
 }
 
 function procesarConsultaAgente() {
-  const prompt = document.getElementById('promptAgenteInput').value;
+  const promptInput = document.getElementById('promptAgenteInput');
   const btn = document.getElementById('btnEnviarConsulta');
   const cargando = document.getElementById('cargandoAgente');
   const respuestaDiv = document.getElementById('respuestaAgenteDiv');
 
-  if (!prompt.trim()) {
+  if (!promptInput || !promptInput.value.trim()) {
     alert("Ingresa una consulta para el Agente.");
     return;
   }
 
-  btn.disabled = true;
-  btn.style.opacity = '0.5';
-  cargando.style.display = 'block';
-  respuestaDiv.style.display = 'none';
+  const prompt = promptInput.value.trim();
 
-  const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6kPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBLM7VmVtDa4oY0xAg/exec";
+  if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
+  if (cargando) cargando.style.display = 'block';
+  if (respuestaDiv) respuestaDiv.style.display = 'none';
+
+  const webAppUrl = "https://script.google.com/macros/s/AKfycbw8SNi30Li6KPS9vOK2Q6zT13v0_IurTy8Dd641Uqz8hCmRYLFJvBM7VmVtDa4.../exec";
 
   const params = new URLSearchParams({
-      accion: "consultar",
-      prompt: prompt
+    accion: "consultar",
+    prompt: prompt,
+    tipoAgente: agenteSeleccionadoActivo,
+    sessionId: "SESION_MOVIL"
   });
 
-  fetch(`${webAppUrl}?${params.toString()}`)
-    .then(res => res.text())
-    .then(text => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
+  fetch(webAppUrl, {
+    method: "POST",
+    mode: "cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    if (cargando) cargando.style.display = 'none';
+    if (respuestaDiv) {
       respuestaDiv.style.display = 'block';
-
-      try {
-        const data = JSON.parse(text);
-        if (data.respuesta) {
-          respuestaDiv.innerHTML = data.respuesta.replace(/\\n/g, '\n');
-        } else {
-          respuestaDiv.textContent = text;
-        }
-      } catch (e) {
-        respuestaDiv.textContent = text;
+      if (data.status === "success" || data.text) {
+        respuestaDiv.innerText = data.text;
+      } else {
+        respuestaDiv.innerText = "Error: " + (data.message || "No se obtuvo respuesta del Agente.");
       }
-    })
-    .catch(err => {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      cargando.style.display = 'none';
+    }
+  })
+  .catch(err => {
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    if (cargando) cargando.style.display = 'none';
+    if (respuestaDiv) {
       respuestaDiv.style.display = 'block';
-      respuestaDiv.textContent = "Error al conectar con el servidor: " + err;
-    });
+      respuestaDiv.innerText = "Error de conexión: " + err.toString();
+    }
+  });
 }
 </script>
 
