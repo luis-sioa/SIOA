@@ -957,10 +957,9 @@ function abrirPantallaAgente() {
 
   contenedor.innerHTML = `
     <div style="padding: 10px; font-family: sans-serif; color: white;">
-      <h3 style="text-align: center; margin-bottom: 12px; color: #fff;">🤖 Agentes IA</h3>
       
       <!-- Pestañas para seleccionar Agente SIOA vs Agente General -->
-      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; margin-top: 5px;">
         <button id="btnTabSIOA" type="button" onclick="cambiarTipoAgente('AGENTE_SIOA')" 
                 style="flex: 1; padding: 8px; border-radius: 6px; border: none; background: #0d6efd; color: white; font-weight: bold; cursor: pointer; font-size: 12px;">
           🏢 Agente SIOA (Corporativo)
@@ -987,7 +986,7 @@ function abrirPantallaAgente() {
 
       <button id="btnEnviarConsulta" onclick="procesarConsultaAgente()" type="button" 
               style="background:#0d6efd; color:white; border:none; width:100%; padding:10px; margin-top:10px; border-radius:6px; font-weight:bold; cursor:pointer;">
-        🔍 Consultar Agente SIOA
+        🔍 Consultar Agentes IA
       </button>
 
       <div id="cargandoAgente" style="display:none; text-align:center; margin-top:10px; font-size:12px; color:#38bdf8;">
@@ -1005,18 +1004,15 @@ function cambiarTipoAgente(tipo) {
   const btnSIOA = document.getElementById('btnTabSIOA');
   const btnGeneral = document.getElementById('btnTabGeneral');
   const lblDesc = document.getElementById('lblDescripcionAgente');
-  const btnEnviar = document.getElementById('btnEnviarConsulta');
 
   if (tipo === "AGENTE_SIOA") {
     if (btnSIOA) { btnSIOA.style.background = "#0d6efd"; btnSIOA.style.color = "white"; }
     if (btnGeneral) { btnGeneral.style.background = "#343a40"; btnGeneral.style.color = "#adb5bd"; }
     if (lblDesc) lblDesc.innerText = "Consultando datos operativos de SIOA (Hojas de Cálculo).";
-    if (btnEnviar) btnEnviar.innerText = "🔍 Consultar Agente SIOA";
   } else {
     if (btnGeneral) { btnGeneral.style.background = "#0d6efd"; btnGeneral.style.color = "white"; }
     if (btnSIOA) { btnSIOA.style.background = "#343a40"; btnSIOA.style.color = "#adb5bd"; }
     if (lblDesc) lblDesc.innerText = "Consultando conceptos técnicos generales y bibliografía acuícola.";
-    if (btnEnviar) btnEnviar.innerText = "🔍 Consultar Agente General";
   }
 }
 
