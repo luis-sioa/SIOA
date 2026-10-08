@@ -895,10 +895,10 @@ const modulosData = {
       { texto: "Ver Mapa / Ubicación", icono: "🌍", url: "#" }
     ]
   },
-  'Agentes IA': {
-    titulo: "Asistente IA SIOA",
+ 'Agente IA': {
+    titulo: "Agente IA",
     opciones: [
-      { texto: "Consultar Asistente IA", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
+      { texto: "Consultar Agente", icono: "🤖", url: "javascript:abrirPantallaAgente()" }
     ]
   },
   'Ver Informes, Reportes IA': {
@@ -953,31 +953,33 @@ function abrirPantallaAgente() {
   const contenedor = document.getElementById('modal-opciones');
   if (!contenedor) return;
 
-  document.getElementById('modal-titulo').textContent = "Asistente IA SIOA";
+  document.getElementById('modal-titulo').textContent = "Agente IA";
 
   contenedor.innerHTML = `
-    <div style="padding: 10px; font-family: sans-serif; color: white; text-align: center;">
+    <div style="padding: 15px 10px; font-family: sans-serif; color: white; text-align: center;">
       
-      <div style="font-size: 48px; margin-bottom: 8px;">🤖</div>
+      <div style="font-size: 54px; margin-bottom: 8px;">🤖</div>
       
-      <h3 style="font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">AGENTE IA SIOA</h3>
+      <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; letter-spacing: 0.5px;">AGENTE SIOA</h3>
       
-      <p style="font-size: 12px; color: #94a3b8; margin-bottom: 16px; line-height: 1.3;">
-        Asistente Inteligente de Operaciones Acuícolas<br>
-        <span style="color: #38bdf8; font-weight: 500;">Conectado directamente a Datos Corporativos</span>
+      <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 4px; font-weight: 500;">
+        Agente Inteligente de Operaciones Acuícolas
       </p>
-
-      <div style="text-align: left; background: #0f172a; padding: 12px; border-radius: 8px; font-size: 12px; color: #cbd5e1; margin-bottom: 18px; border: 1px solid #334155;">
-        <div style="margin-bottom: 6px;">📊 <b>Análisis de Datos:</b> Monitoreo, stock y cosechas</div>
-        <div style="margin-bottom: 6px;">📝 <b>Informes Técnicos:</b> Generación de reportes resumidos</div>
-        <div>🌊 <b>Acuicultura:</b> Trazabilidad y parámetros operativos</div>
-      </div>
+      
+      <p style="font-size: 12px; color: #38bdf8; margin-bottom: 24px; font-weight: 600;">
+        Conectado directamente a Datos Corporativos
+      </p>
 
       <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" 
          onclick="cerrarModuloMenu()"
-         style="display: block; width: 100%; padding: 12px; background: #0d6efd; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4); box-sizing: border-box;">
-         🚀 Abrir Agente IA SIOA
+         style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: #0d6efd; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 15px; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4); box-sizing: border-box; margin-bottom: 12px;">
+         <span>🤖</span> <span>Consultar Agente</span>
       </a>
+
+      <button onclick="cerrarModuloMenu()" 
+              style="background: transparent; border: none; color: #ef4444; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px; width: 100%;">
+        Cancelar
+      </button>
 
     </div>
   `;
