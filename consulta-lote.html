@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consulta de lote - SIOA</title>
+<style>
+  :root { --fondo:#0f172a; --tarjeta:#1e293b; --borde:#334155; --texto:#f1f5f9; --suave:#94a3b8; --azul:#0d6efd; --aviso:#f59e0b; --error:#ef4444; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--fondo); color:var(--texto); font-family: Arial, Helvetica, sans-serif; }
+  .caja { max-width:640px; margin:0 auto; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .sub { color:var(--suave); font-size:13px; margin:0 0 16px; }
+  .fila { display:flex; gap:8px; }
+  input { flex:1; min-width:0; padding:14px; font-size:16px; border-radius:10px; border:1px solid var(--borde); background:var(--tarjeta); color:var(--texto); text-transform:uppercase; }
+  button { padding:14px 18px; font-size:16px; border:0; border-radius:10px; background:var(--azul); color:#fff; cursor:pointer; }
+  button:disabled { opacity:.6; }
+  .tarjeta { background:var(--tarjeta); border:1px solid var(--borde); border-radius:12px; padding:14px; margin-top:14px; }
+  .etq { color:var(--suave); font-size:12px; }
+  .valor { font-size:18px; font-weight:bold; }
+  .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:8px; }
+  .aviso { border-left:4px solid var(--aviso); }
+  .error { border-left:4px solid var(--error); }
+  .tabla { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:6px 4px; border-bottom:1px solid var(--borde); white-space:nowrap; }
+  .fuente { color:var(--suave); font-size:12px; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Consulta de lote</h1>
+  <p class="sub">Datos exactos de INGRESO_SISTEMAS (ESCENARIOS)</p>
+  <div class="fila">
+    <input id="lote" type="text" placeholder="Ej. BIOS-0220425" autocomplete="off" autocapitalize="characters">
+    <button id="btn" onclick="consultar()">Consultar</button>
+  </div>
+  <div id="resultado"></div>
+</div>
+
+<script>
+var URL_APP = 'https://script.google.com/macros/s/AKfycbxi9xS6MI-ETcom5zjAakvreAODPvez4Tpx8KZPRJcyto1_Cc0XOH5AtnLN065-iWEf/exec';
+var CLAVE = '706992c8c7b44736b6b5949b4532cf32';
+
+function esc(t) {
+  return String(t).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function fmt(n) { return Number(n).toLocaleString('es-PE', { maximumFractionDigits: 2 }); }
+function aFecha(s) {
+  var p = String(s).split('/');
+  return p.length === 3 ? new Date(+p[2], +p[1] - 1, +p[0]) : null;
+}
+
+function pintar(d) {
+  var det = d.detalle;
+  var h = '';
+
+  if (d.interpretado_desde) {
+    h += '<div class="tarjeta aviso">Se interpretó «' + esc(d.interpretado_desde) + '» como «' + esc(d.lote) + '» (letra O leída como cero).</div>';
+  }
+
+  var orden = det.slice().sort(function (a, b) {
+    return (aFecha(a.fecha) || 0) - (aFecha(b.fecha) || 0);
+  });
+  var dias = {};
+  det.forEach(function (x) { dias[x.fecha] = true; });
+  var nDias = Object.keys(dias).length;
+  var procs = {};
+  det.forEach(function (x) { procs[x.procedencia] = true; });
+
+  var m = /^BIOS-(\d{3})(\d{2})(\d{2})$/.exec(d.lote);
+  if (m) {
+    var mes = parseInt(m[2], 10), anio = 2000 + parseInt(m[3], 10);
+    var fuera = det.filter(function (x) {
+      var f = aFecha(x.fecha);
+      return f && (f.getMonth() + 1 !== mes || f.getFullYear() !== anio);
+    });
+    if (fuera.length) {
+      h += '<div class="tarjeta aviso">El código indica envío en ' + mes + '/' + anio +
+        ', pero hay ingresos con fecha: ' + esc(fuera.map(function (x) { return x.fecha; }).join(', ')) + '.</div>';
+    }
+  }
+
+  h += '<div class="tarjeta">' +
+    '<div class="etq">Lote</div><div class="valor">' + esc(d.lote) + '</div>' +
+    '<div class="etq" style="margin-top:8px">Procedencia</div><div>' + esc(Object.keys(procs).join(' / ')) + '</div>' +
+    '<div class="etq" style="margin-top:8px">Ingreso</div><div>del ' + esc(orden[0].fecha) + ' al ' + esc(orden[orden.length - 1].fecha) +
+    ' (' + nDias + (nDias === 1 ? ' día' : ' días') + ')</div></div>';
+
+  Object.keys(d.totales_por_tipo).forEach(function (tipo) {
+    var t = d.totales_por_tipo[tipo];
+    h += '<div class="tarjeta"><div class="etq">Total ' + esc(tipo) + '</div>' +
+      '<div class="grid">' +
+      '<div><div class="etq">Cantidad</div><div class="valor">' + fmt(t.cantidad) + '</div></div>' +
+      '<div><div class="etq">Líneas</div><div class="valor">' + fmt(t.lineas) + '</div></div>' +
+      '<div><div class="etq">Filas</div><div class="valor">' + t.filas + '</div></div>' +
+      '</div></div>';
+  });
+
+  var porArea = {};
+  det.forEach(function (x) {
+    var k = x.tipo + '|' + x.concesion;
+    if (!porArea[k]) porArea[k] = { tipo: x.tipo, concesion: x.concesion, cantidad: 0, lineas: 0 };
+    porArea[k].cantidad += x.cantidad;
+    porArea[k].lineas += x.lineas;
+  });
+  h += '<div class="tarjeta"><div class="etq">Por área de producción</div><div class="tabla"><table>' +
+    '<tr><th>Área</th><th>Tipo</th><th>Cantidad</th><th>Líneas</th></tr>';
+  Object.keys(porArea).forEach(function (k) {
+    var a = porArea[k];
+    h += '<tr><td>' + esc(a.concesion) + '</td><td>' + esc(a.tipo) + '</td><td>' + fmt(a.cantidad) + '</td><td>' + fmt(a.lineas) + '</td></tr>';
+  });
+  h += '</table></div></div>';
+
+  h += '<div class="tarjeta"><div class="etq">Detalle fila por fila</div><div class="tabla"><table>' +
+    '<tr><th>Fila</th><th>Fecha</th><th>Tipo</th><th>Cantidad</th><th>Área</th><th>Líneas</th></tr>';
+  orden.forEach(function (x) {
+    h += '<tr><td>' + x.fila + '</td><td>' + esc(x.fecha) + '</td><td>' + esc(x.tipo) + '</td><td>' + fmt(x.cantidad) +
+      '</td><td>' + esc(x.concesion) + '</td><td>' + fmt(x.lineas) + '</td></tr>';
+  });
+  h += '</table></div>' +
+    '<div class="fuente">Fuente: ESCENARIOS > INGRESO_SISTEMAS, filas ' +
+    esc(det.map(function (x) { return x.fila; }).join(', ')) + '</div></div>';
+
+  return h;
+}
+
+async function consultar() {
+  var cod = document.getElementById('lote').value.trim();
+  var out = document.getElementById('resultado');
+  var btn = document.getElementById('btn');
+  if (!cod) {
+    out.innerHTML = '<div class="tarjeta error">Escribe el código del lote.</div>';
+    return;
+  }
+  btn.disabled = true;
+  out.innerHTML = '<div class="tarjeta">Consultando...</div>';
+  try {
+    var r = await fetch(URL_APP + '?key=' + encodeURIComponent(CLAVE) + '&accion=lote&codigo=' + encodeURIComponent(cod));
+    var d = await r.json();
+    if (d.ok) {
+      out.innerHTML = pintar(d);
+    } else {
+      out.innerHTML = '<div class="tarjeta error">' + esc(d.error || 'Error') + (d.lote ? ': ' + esc(d.lote) : '') + '</div>';
+    }
+  } catch (e) {
+    out.innerHTML = '<div class="tarjeta error">No se pudo conectar. Revisa tu internet e inténtalo de nuevo.</div>';
+  }
+  btn.disabled = false;
+}
+
+document.getElementById('lote').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') consultar();
+});
+</script>
+</body>
+</html>
